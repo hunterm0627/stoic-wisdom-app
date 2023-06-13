@@ -1,0 +1,54 @@
+Notes on process
+
+
+React Navigation dependencies
+npm install @react-navigation/native
+npm install @react-navigation/stack
+
+custom font?
+have to install expo font
+npm install expo-font
+
+
+
+old code:
+
+
+import React from 'react';
+import { View, Text, Button, StyleSheet, Image } from 'react-native';
+
+const StartScreen = ({ navigation }) => {
+    const handleLogin = () => {
+        // Logic for handling login
+        navigation.navigate('Login'); // Navigate to the login screen
+    };
+
+    const handleSignUp = () => {
+        // Logic for handling sign up
+        navigation.navigate('SignUp'); // Navigate to the sign-up screen
+    };
+
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Stoic Wisdom</Text>
+            <Text>Mastering the art of tranquility, one quote at a time.</Text>
+            <Button title="Login" onPress={handleLogin} />
+            <Button title="Sign Up" onPress={handleSignUp} />
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        marginBottom: 20,
+    },
+});
+
+export default StartScreen;
