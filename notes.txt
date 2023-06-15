@@ -1,5 +1,7 @@
 Notes on process
 
+NPM 
+npm install
 
 React Navigation dependencies
 npm install @react-navigation/native
@@ -8,6 +10,9 @@ npm install @react-navigation/stack
 custom font?
 have to install expo font
 npm install expo-font
+
+
+npx expo start --clear (react-native-reanimated/plugin // babel plugins)
 
 
 
