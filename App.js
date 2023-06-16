@@ -1,7 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
+import { createStackNavigator } from '@react-navigation/stack';
+import { StyleSheet } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
@@ -11,12 +12,27 @@ import MissionScreen from './screens/MissionScreen';
 import ContactScreen from './screens/ContactScreen';
 import StartScreen from './screens/StartScreen';
 
-const Drawer = createDrawerNavigator();
+const Stack = createStackNavigator();
 
-export default function App() {
+function App() {
     return (
-        <NavigationContainer>
-            <Drawer.Navigator initialRouteName="StartScreen">
+        <NavigationContainer >
+            <Stack.Navigator initialRouteName='StartScreen'>
+                <Stack.Screen name='StartScreen' component={StartScreen} options={{ title: 'Title Change Later' }}/>
+                <Stack.Screen name='SignUp' component={SignUpScreen} />
+                <Stack.Screen name='Login' component={LoginScreen} />
+                <Stack.Screen name='Home' component={HomeScreen} />
+                <Stack.Screen name='Mission' component={MissionScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
+
+
+
+export default App;
+
+            {/* <Drawer.Navigator screenOptions={screenOptions} initialRouteName="StartScreen">
                 <Drawer.Screen name="StartScreen" component={StartScreen} options={{ headerShown: false }}/>
                 <Drawer.Screen name="Home" component={HomeScreen} />
                 <Drawer.Screen name="Login" component={LoginScreen} />
@@ -25,10 +41,7 @@ export default function App() {
                 <Drawer.Screen name="Favorites" component={FavoritesScreen} />
                 <Drawer.Screen name="Mission" component={MissionScreen} />
                 <Drawer.Screen name="Contact" component={ContactScreen} />
-            </Drawer.Navigator>
-        </NavigationContainer>
-    );
-};
+            </Drawer.Navigator> */}
 
 
 // import React, { useEffect } from 'react';

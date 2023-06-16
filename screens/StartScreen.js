@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { COLOR_INDIGO, COLOR_LAVENDER, COLOR_ORANGE } from '../shared/colors';
+import { COLOR_ACCENT, COLOR_INDIGO, COLOR_LAVENDER, COLOR_ORANGE, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
 
 const StartScreen = ({ navigation }) => {
     return (
@@ -9,7 +9,16 @@ const StartScreen = ({ navigation }) => {
             <Text style={styles.title}>WISDOM</Text>
             <Text style={styles.subtitle}>Mastering the art of tranquility,</Text>
             <Text style={styles.subtitle}>one quote at a time.</Text>
-            <Button style={styles.button} title="Login" onPress={() => navigation.navigate('Login')} />
+            <Button
+                title="Login"
+                onPress={() => {
+                    /* 1. Navigate to the Details route with params */
+                    navigation.navigate('Login', {
+                        itemId: 86,
+                        otherParam: 'anything you want here',
+                    });
+                }}
+            />
             <Button title="Sign Up" onPress={() => navigation.navigate('SignUp')} />
         </View>
     );
@@ -20,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: COLOR_INDIGO
+        backgroundColor: COLOR_PRIMARY,
     },
     title: {
         fontSize: 55,
@@ -30,10 +39,10 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 15,
-        color: COLOR_LAVENDER
+        color: COLOR_ACCENT,
     },
     button: {
-        backgroundColor: COLOR_ORANGE
+        backgroundColor: COLOR_SECONDARY,
     }
 });
 

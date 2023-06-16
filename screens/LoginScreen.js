@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TextInput, Alert } from 'react-native';
+import { View, Pressable, Text, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
+import { COLOR_ACCENT, COLOR_INDIGO, COLOR_INPUT_LIGHT, COLOR_LAVENDER, COLOR_ORANGE, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ route, navigation }) => {
+    /* 2. Get the param */
+    // const { itemId, otherParam } = route.params;
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
@@ -16,7 +20,10 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login Screen</Text>
+            <Text style={styles.title}>Stoic</Text>
+            <Text style={[styles.title, { marginBottom: 30 }]}>Wisdom</Text>
+            {/* <Text>itemID:{JSON.stringify(itemId)}</Text> */}
+            {/* <Text>otherParam:{JSON.stringify(otherParam)}</Text> */}
             <TextInput
                 style={styles.input}
                 placeholder="Username"
@@ -30,7 +37,11 @@ const LoginScreen = ({ navigation }) => {
                 value={password}
                 onChangeText={setPassword}
             />
-            <Button title="Login" onPress={handleLogin} />
+            <Pressable title="Login" onPress={handleLogin} style={styles.button} TouchableOpacity>
+                <Text style={styles.text}>Login</Text>
+            </Pressable>
+            <Text style={styles.textLight}>Forgot Password?</Text>
+            <Text style={styles.textLight}>Don't have an account? Sign Up!</Text>
         </View>
     );
 };
@@ -41,20 +52,48 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         padding: 16,
+        backgroundColor: COLOR_PRIMARY,
+        
     },
     title: {
-        fontSize: 24,
+        fontSize: 70,
+        textTransform: 'uppercase',
         fontWeight: 'bold',
-        marginBottom: 16,
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white'
     },
     input: {
-        width: '100%',
+        width: '80%',
         height: 40,
-        borderWidth: 1,
-        borderColor: 'gray',
+        // borderWidth: 1,
+        // borderColor: 'gray',
+        color: COLOR_ACCENT,
+        backgroundColor: COLOR_INPUT_LIGHT,
         marginBottom: 16,
-        paddingHorizontal: 8,
-    }
+        paddingHorizontal: 20,
+        borderRadius: 20,
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 100,
+        borderRadius: 50,
+        elevation: 3,
+        backgroundColor: COLOR_SECONDARY,
+    },
+    text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+    },
+    textLight: {
+        color: COLOR_ACCENT,
+    },
+
 });
 
 export default LoginScreen;
