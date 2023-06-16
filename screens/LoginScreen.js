@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Pressable, Text, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
-import { COLOR_ACCENT, COLOR_INDIGO, COLOR_INPUT_LIGHT, COLOR_LAVENDER, COLOR_ORANGE, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { View, Pressable, Text, StyleSheet, TextInput, Alert } from 'react-native';
+import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { Button } from '@rneui/themed';
 
 const LoginScreen = ({ route, navigation }) => {
     /* 2. Get the param */
@@ -27,12 +28,14 @@ const LoginScreen = ({ route, navigation }) => {
             <TextInput
                 style={styles.input}
                 placeholder="Username"
+                placeholderTextColor= {COLOR_ACCENT}
                 value={username}
                 onChangeText={setUsername}
             />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
+                placeholderTextColor= {COLOR_ACCENT}
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}

@@ -26,15 +26,6 @@ const Quotes = () => {
         setName(randomQuote.name);
     };
 
-    function removeUnderscore(name) {
-        return name
-            .split('')
-            .map((char) => {
-                return char === '_' ? ' ' : char;
-            })
-            .join('');
-    }
-
     const getImageSource = () => {
         switch (name.toLowerCase()) {
             case 'name1':

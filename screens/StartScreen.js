@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import { COLOR_ACCENT, COLOR_INDIGO, COLOR_LAVENDER, COLOR_ORANGE, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
 
 const StartScreen = ({ navigation }) => {
     return (
