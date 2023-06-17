@@ -5,7 +5,9 @@ npm install
 
 React Navigation dependencies
 npm install @react-navigation/native
-npm install @react-navigation/stack
+npm install @react-navigation/stack 
+
+React Native Elements
 
 custom font?
 have to install expo font

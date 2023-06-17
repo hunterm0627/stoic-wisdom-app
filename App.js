@@ -17,7 +17,7 @@ const Drawer = createDrawerNavigator();
 
 function HomeDrawer() {
     return (
-        <Drawer.Navigator initialRouteName="Home">
+        <Drawer.Navigator initialRouteName="Home" >
             <Drawer.Screen name="Dashboard" component={HomeScreen} />
             <Drawer.Screen name="Favorites" component={FavoritesScreen} />
             <Drawer.Screen name="Mission" component={MissionScreen} />
