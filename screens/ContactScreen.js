@@ -4,6 +4,7 @@ import { COLOR_PRIMARY, COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_SECONDARY } from 
 // import { Card } from 'react-native-elements';
 import { Card, Text } from '@rneui/themed';
 
+
 const ContactScreen = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const ContactScreen = () => {
         // Handle submit
     };
 
-    return (
+    return ( 
         <View style={styles.container}>
             <Text h1 style={styles.title}>Contact Us</Text>
             <Text style={styles.text}>Questions or concerns?</Text>
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: COLOR_SECONDARY,
+        // backgroundColor: COLOR_SECONDARY,
         
     },
     text: {
@@ -81,7 +82,6 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         // borderColor: 'gray',
         color: COLOR_ACCENT,
-       
         backgroundColor: 'white',
         marginVertical: 20,
         paddingHorizontal: 20,
