@@ -1,7 +1,9 @@
-const images = {
-    Marcus_Aurelius: "../assets/images/marcus_aurelius.jpg",
-    Epictetus: "../assets/images/epictetus.jpg",
-    Seneca: "../assets/images/seneca.jpg"
-};
-
-export default images
+export const Chrysippus = require('../assets/images/Chrysippus.png');
+export const Cicero = require('../assets/images/Cicero.png');
+export const Citium = require('../assets/images/Citium.png');
+export const Cleanthes = require('../assets/images/Cleanthes.png');
+export const defaultImg = require('../assets/images/defaultImg.jpg');
+export const Hierocles = require('../assets/images/Hierocles.png');
+export const Marcus = require('../assets/images/Marcus.png');
+export const Panaetius = require('../assets/images/Panaetius.png');
+export const Seneca = require('../assets/images/Seneca.png');
