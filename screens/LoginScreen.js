@@ -18,7 +18,7 @@ const LoginScreen = ({ route, navigation }) => {
 
     const handleLogin = () => {
         // Perform login logic here
-        if (email === '1' && password === '1') {
+        if (email === '' && password === '') {
             navigation.navigate('Home');
         } else {
             Alert.alert('Invalid email or password');

@@ -4,14 +4,14 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerI
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
 import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_SECONDARY } from './shared/colors';
-
+import { normalize } from './utils/scaleUtil';
 
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import UserScreen from './screens/UserScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
-import MissionScreen from './screens/MissionScreen';
+import AboutScreen from './screens/AboutScreen';
 import ContactScreen from './screens/ContactScreen';
 import StartScreen from './screens/StartScreen';
 
@@ -40,19 +40,55 @@ function CustomDrawerContent(props) {
 function HomeDrawer() {
     return (
         <Drawer.Navigator
-        screenOptions={{drawerStyle: { backgroundColor: COLOR_ACCENT, width: '100%' } }}
-        initialRouteName="Home"
-        drawerContent={props => <CustomDrawerContent {...props} />}
-    >
-            <Drawer.Screen name="Dashboard" component={HomeScreen} options={{
-                drawerLabel: ({ color, focused }) => (
-                    <Text style={{ color: focused ? 'white' : 'yellow', fontSize: 30, fontWeight: '700' }}>Dashboard</Text>
-                )
-            }}/>
-            <Drawer.Screen name="Favorites" component={FavoritesScreen} />
-            <Drawer.Screen name="Mission" component={MissionScreen} />
-            <Drawer.Screen name="Contact" component={ContactScreen} />
-            <Drawer.Screen name="User" component={UserScreen} />
+            screenOptions={{ drawerStyle: { backgroundColor: '#fff', width: '70%' } }}
+            initialRouteName="Home"
+            drawerContent={props => <CustomDrawerContent {...props} />}
+        >
+            <Drawer.Screen
+                name="Dashboard"
+                component={HomeScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>Dashboard</Text>
+                    )
+                }}
+            />
+            <Drawer.Screen
+                name="Favorites"
+                component={FavoritesScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>Favorites</Text>
+                    )
+                }}
+            />
+            <Drawer.Screen
+                name="About"
+                component={AboutScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>About</Text>
+                    )
+                }}
+            />
+            <Drawer.Screen
+                name="Contact"
+                component={ContactScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>Contact</Text>
+                    )
+                }}
+            />
+            <Drawer.Screen
+                name="User"
+                component={UserScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>User</Text>
+                    )
+                }}
+            />
         </Drawer.Navigator>
     );
 }
@@ -60,7 +96,7 @@ function HomeDrawer() {
 function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='StartScreen'>
+            <Stack.Navigator initialRouteName='Home'>
                 <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }} />
                 <Stack.Screen name='SignUp' component={SignUpScreen} />
                 <Stack.Screen name='Login' component={LoginScreen} />
@@ -77,6 +113,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    drawerText: {
+        color: COLOR_ACCENT,
+        fontSize: 25,
+        fontWeight: '700',
+        letterSpacing: normalize(3),
+        marginLeft: normalize(20),
+        paddingVertical: normalize(5),
+    },
     drawerImage: {
         height: 120,
         width: 120,
@@ -88,6 +132,7 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
 
 // Good code below
 

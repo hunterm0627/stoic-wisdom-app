@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 // import { Card } from 'react-native-elements';
 import { Card, Text } from '@rneui/themed';
 
-const MissionScreen = () => {
+const AboutScreen = () => {
 // const { height } = Dimensions.get('window')
 // const titleFontSize = height * 0.04;
 
@@ -12,7 +12,7 @@ const MissionScreen = () => {
 
     return (
         <View styles={styles.container}>
-                <Text h1 style={styles.title}>Mission</Text>
+                <Text h1 style={styles.title}>About</Text>
                 <Text h4 h4Style={styles.h4}>
                 At the Stoic Wisdom App, our mission is to promote the principles of Stoicism and encourage individuals to embrace a more mindful, resilient, and virtuous approach to life. We believe that the timeless wisdom of Stoicism can provide valuable guidance in navigating the challenges and complexities of the modern world.
                 </Text>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MissionScreen;
+export default AboutScreen;
