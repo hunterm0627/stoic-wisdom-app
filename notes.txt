@@ -16,7 +16,8 @@ npm install expo-font
 
 npx expo start --clear (react-native-reanimated/plugin // babel plugins)
 
-
+How to add inline style to something that already has a style applied to it:
+style={StyleSheet.compose(styles.button, { marginTop: normalize(28) })} 
 
 old code:
 
