@@ -3,6 +3,7 @@ import { COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors'
 import { View, StyleSheet } from 'react-native';
 // import { Card } from 'react-native-elements';
 import { Card, Text } from '@rneui/themed';
+import { normalize } from '../utils/scaleUtil';
 
 const AboutScreen = () => {
 // const { height } = Dimensions.get('window')
@@ -33,23 +34,22 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         marginLeft: '10%',
         marginVertical: '5%',
-        letterSpacing: 4,
+        letterSpacing: normalize(4),
     },
     h4: {
-        fontSize: 28,
+        fontSize: normalize(15),
         marginHorizontal: '10%',
         fontWeight: '400',
         color: 'slategray',
-        letterSpacing: 2,
-        lineHeight: 45,
+        letterSpacing: normalize(2),
+        lineHeight: normalize(28),
     },
     dividerStyle: {
         backgroundColor: COLOR_SECONDARY, // Customize the color of the divider
-        height: 15, // Customize the height of the divider
-        marginVertical: 10, // Add vertical margin to the divider
+        height: normalize(15), // Customize the height of the divider
         width: '80%',
         alignSelf: 'center',
-        marginTop: 30,
+        marginTop: normalize(15),
     },
 });
 

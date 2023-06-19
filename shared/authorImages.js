@@ -7,3 +7,4 @@ export const Hierocles = require('../assets/images/Hierocles.png');
 export const Marcus = require('../assets/images/Marcus.png');
 export const Panaetius = require('../assets/images/Panaetius.png');
 export const Seneca = require('../assets/images/Seneca.png');
+export const Epictetus = require('../assets/images/Epictetus.png');

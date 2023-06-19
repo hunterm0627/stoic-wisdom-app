@@ -23,7 +23,7 @@ function CustomDrawerContent(props) {
         <DrawerContentScrollView {...props}>
             <View style={styles.drawerHeader}>
                 <Image
-                    source={{ uri: 'https://example.com/your-logo.jpg' }}
+                    source={require('./assets/images/default.png')} 
                     style={styles.drawerImage}
                 />
             </View>
@@ -41,7 +41,7 @@ function HomeDrawer() {
     return (
         <Drawer.Navigator
             screenOptions={{ drawerStyle: { backgroundColor: '#fff', width: '70%' } }}
-            initialRouteName="Home"
+            initialRouteName="StartScreen"
             drawerContent={props => <CustomDrawerContent {...props} />}
         >
             <Drawer.Screen
@@ -96,7 +96,7 @@ function HomeDrawer() {
 function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home'>
+            <Stack.Navigator initialRouteName='StartScreen'>
                 <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }} />
                 <Stack.Screen name='SignUp' component={SignUpScreen} />
                 <Stack.Screen name='Login' component={LoginScreen} />
@@ -122,9 +122,9 @@ const styles = StyleSheet.create({
         paddingVertical: normalize(5),
     },
     drawerImage: {
-        height: 120,
-        width: 120,
-        borderRadius: 60,
+        height: normalize(100),
+        width: normalize(100),
+        // borderRadius: 50,
     },
     text: {
         color: 'white',

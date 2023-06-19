@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
     },
     // Head image
     image: {
-        width: normalize(200),
-        height: normalize(200), 
-        marginTop: normalize(-28), // Adjust as needed to create overlap
-        marginBottom: normalize(10),
+        width: normalize(220),
+        height: normalize(220), 
+        marginTop: normalize(-35), // Adjust as needed to create overlap
+        marginBottom: normalize(2),
         resizeMode: 'contain', // To maintain image aspect ratio
     },
     button: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: normalize(10),
         paddingHorizontal: normalize(40),
-        borderRadius: 50,
+        borderRadius: normalize(50),
         marginTop: normalize(20),
         elevation: 3,
         backgroundColor: COLOR_SECONDARY,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         paddingVertical: normalize(10),
         paddingHorizontal: normalize(40),
         borderColor: COLOR_SECONDARY,
-        borderRadius: 50,
+        borderRadius: normalize(50),
         borderWidth: normalize(3),
         marginTop: normalize(15),
         elevation: 3,
