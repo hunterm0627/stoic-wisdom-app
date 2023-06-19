@@ -6,10 +6,12 @@ import { COLOR_HEART, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
 import * as AuthorImages from '../shared/authorImages';
 import Icon from 'react-native-vector-icons/FontAwesome'; // new import
 
+
 const Quotes = () => {
     const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
     const [prevQuotes, setPrevQuotes] = useState([]);
     const [favorites, setFavorites] = useState([]); // new state variable for favorites
+    
 
     useEffect(() => {
         const quote = QUOTES[quoteIndex];
@@ -67,8 +69,8 @@ const Quotes = () => {
             <View style={styles.quoteContainer}>
                 <Image source={ImageComponent} style={styles.image} resizeMode="cover" />
                 <View style={styles.quoteTextContainer}>
-                    <View style={styles.quoteWrapper}>
-                        <Text style={styles.quoteText}>{quote}</Text>
+                    <View style={styles.quoteWrapper} >
+                        <Text style={styles.quoteText} adjustsFontSizeToFit >{quote}</Text>
                     </View>
                     <Text style={styles.authorText}>
                         <Text style={styles.lastNameText}>{firstName}</Text> {lastName}

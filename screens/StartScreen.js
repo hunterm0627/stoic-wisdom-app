@@ -8,42 +8,44 @@ const StartScreen = ({ navigation }) => {
         <View style={styles.container}>
             <Text style={styles.titleStoic}>STOIC</Text>
             <Text style={styles.titleWisdom}>WISDOM</Text>
-                <Image
-                    style={styles.image}
-                    source={require('../assets/images/default.png')} 
-                />
+            <Image
+                style={styles.image}
+                source={require('../assets/images/default.png')}
+            />
             <Text style={styles.subtitle}>Mastering the art of tranquility,</Text>
             <Text style={styles.subtitle}>one quote at a time.</Text>
 
 
             {/* Login Button */}
-            
-            <TouchableOpacity activeOpacity={0.7} style={styles.loginBtn}>
-                <Pressable title="Login" onPress={() => {
-                    /* 1. Navigate to the Details route with params */
+
+            <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.loginBtn}
+                onPress={() => {
                     navigation.navigate('Login', {
                         itemId: 86,
                         otherParam: 'anything you want here',
                     });
-                }}>
-                    <Text style={styles.text}>Login</Text>
-                </Pressable>
+                }}
+            >
+                <Text style={styles.text}>Login</Text>
             </TouchableOpacity>
 
             {/* Sign Up Button */}
-            
-            <TouchableOpacity activeOpacity={0.7} style={styles.signUpBtn}>
-                <Pressable title="Login" onPress={() => {
-                    /* 1. Navigate to the Details route with params */
+
+            <TouchableOpacity
+                activeOpacity={0.7}
+                style={styles.signUpBtn}
+                onPress={() => {
                     navigation.navigate('SignUp', {
                         itemId: 86,
                         otherParam: 'anything you want here',
                     });
-                }}>
-                    <Text style={styles.text}>Sign Up</Text>
-                </Pressable>
+                }}
+            >
+                <Text style={styles.text}>Sign Up</Text>
             </TouchableOpacity>
-            
+
         </View>
     );
 };
@@ -70,7 +72,7 @@ const styles = StyleSheet.create({
         marginBottom: normalize(5),
         color: 'white',
         textAlignVertical: 'center'
-        
+
     },
     subtitle: {
         fontSize: normalize(15),
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
     // Head image
     image: {
         width: normalize(220),
-        height: normalize(220), 
+        height: normalize(220),
         marginTop: normalize(-35), // Adjust as needed to create overlap
         marginBottom: normalize(2),
         resizeMode: 'contain', // To maintain image aspect ratio

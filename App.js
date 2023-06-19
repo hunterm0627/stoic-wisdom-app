@@ -14,6 +14,8 @@ import FavoritesScreen from './screens/FavoritesScreen';
 import AboutScreen from './screens/AboutScreen';
 import ContactScreen from './screens/ContactScreen';
 import StartScreen from './screens/StartScreen';
+import PolicyScreen from './screens/PolicyScreen';
+import TermsScreen from './screens/TermsScreen';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -96,10 +98,12 @@ function HomeDrawer() {
 function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='StartScreen'>
+            <Stack.Navigator initialRouteName='SignUp'>
                 <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }} />
                 <Stack.Screen name='SignUp' component={SignUpScreen} />
                 <Stack.Screen name='Login' component={LoginScreen} />
+                <Stack.Screen name ='Policy' component={PolicyScreen} />
+                <Stack.Screen name ='Terms' component={TermsScreen} />
                 <Stack.Screen name='Home' component={HomeDrawer} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
