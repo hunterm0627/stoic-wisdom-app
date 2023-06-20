@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
@@ -10,6 +10,8 @@ import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
 import UserScreen from './screens/UserScreen';
+import FavoritesPage from './screens/FavoritesPage';
+import { FavoritesList } from './screens/HomeScreen';
 import FavoritesScreen from './screens/FavoritesScreen';
 import AboutScreen from './screens/AboutScreen';
 import ContactScreen from './screens/ContactScreen';
@@ -17,10 +19,13 @@ import StartScreen from './screens/StartScreen';
 import PolicyScreen from './screens/PolicyScreen';
 import TermsScreen from './screens/TermsScreen';
 
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {
+    const navigation = useNavigation();
+
     return (
         <DrawerContentScrollView {...props}>
             <View style={styles.drawerHeader}>
@@ -33,6 +38,16 @@ function CustomDrawerContent(props) {
             <DrawerItem
                 label="Help"
                 onPress={() => alert('Link to help')}
+            // Add your own styling here
+            />
+            <DrawerItem
+                label="Terms & Conditions"
+                onPress={() => navigation.navigate('Terms')}
+            // Add your own styling here
+            />
+            <DrawerItem 
+                label="Privacy Policy"
+                onPress={() => navigation.navigate('Policy')}
             // Add your own styling here
             />
         </DrawerContentScrollView>
@@ -98,7 +113,7 @@ function HomeDrawer() {
 function App() {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName='SignUp'>
+            <Stack.Navigator initialRouteName='StartScreen'>
                 <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }} />
                 <Stack.Screen name='SignUp' component={SignUpScreen} />
                 <Stack.Screen name='Login' component={LoginScreen} />
@@ -138,48 +153,3 @@ const styles = StyleSheet.create({
 export default App;
 
 
-// Good code below
-
-// import * as React from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
-// import { createStackNavigator } from '@react-navigation/stack';
-
-// import HomeScreen from './screens/HomeScreen';
-// import LoginScreen from './screens/LoginScreen';
-// import SignUpScreen from './screens/SignUpScreen';
-// import UserScreen from './screens/UserScreen';
-// import FavoritesScreen from './screens/FavoritesScreen';
-// import MissionScreen from './screens/MissionScreen';
-// import ContactScreen from './screens/ContactScreen';
-// import StartScreen from './screens/StartScreen';
-
-// const Stack = createStackNavigator();
-// const Drawer = createDrawerNavigator();
-
-// function HomeDrawer() {
-//     return (
-//         <Drawer.Navigator initialRouteName="Home" >
-//             <Drawer.Screen name="Dashboard" component={HomeScreen} />
-//             <Drawer.Screen name="Favorites" component={FavoritesScreen} />
-//             <Drawer.Screen name="Mission" component={MissionScreen} />
-//             <Drawer.Screen name="Contact" component={ContactScreen} />
-//             <Drawer.Screen name="User" component={UserScreen} />
-//         </Drawer.Navigator>
-//     );
-// }
-
-// function App() {
-//     return (
-//         <NavigationContainer >
-//             <Stack.Navigator initialRouteName='StartScreen'>
-//                 <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }}/>
-//                 <Stack.Screen name='SignUp' component={SignUpScreen} />
-//                 <Stack.Screen name='Login' component={LoginScreen} />
-//                 <Stack.Screen name='Home' component={HomeDrawer} options={{ headerShown: false }}/>
-//             </Stack.Navigator>
-//         </NavigationContainer>
-//     );
-// }
-
-// export default App;

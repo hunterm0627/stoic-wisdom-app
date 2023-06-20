@@ -6,6 +6,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius was a Roman emperor and philosopher, known for his book 'Meditations.'",
         id: 1,
+        favorite: false,
     },
     {
         quote: "Happiness and freedom begin with a clear understanding of one principle: Some things are within our control, and some things are not.",
@@ -14,6 +15,7 @@ export const QUOTES = [
         image: "Epictetus",  // Assuming Cleanthes is used for Epictetus, replace accordingly
         fact: "Epictetus was a Greek philosopher and former slave, whose teachings focused on personal freedom and the importance of self-discipline.",
         id: 2,
+        favorite: true,
     },
     {
         quote: "Waste no more time arguing what a good man should be. Be one.",
@@ -22,6 +24,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius served as the Roman emperor from 161 to 180 AD.",
         id: 3,
+        favorite: true,
     },
     {
         quote: "Man conquers the world by conquering himself.",
@@ -30,6 +33,7 @@ export const QUOTES = [
         image: "Citium",  // Assuming Citium is used for Zeno of Citium, replace accordingly
         fact: "Zeno of Citium was a Greek philosopher and the founder of the Stoic school of philosophy.",
         id: 4,
+        favorite: false,
     },
     {
         quote: "The happiness of your life depends upon the quality of your thoughts.",
@@ -38,6 +42,7 @@ export const QUOTES = [
         image: "Seneca",
         fact: "Seneca the Younger was a Roman Stoic philosopher, statesman, and dramatist.",
         id: 5,
+        favorite: false,
     },
     {
         quote: "You have power over your mind — not outside events. Realize this, and you will find strength.",
@@ -46,6 +51,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius was the last of the Five Good Emperors of Rome.",
         id: 6,
+        favorite: false,
     },
     {
         quote: "Difficulties strengthen the mind, as labor does the body.",
@@ -54,6 +60,7 @@ export const QUOTES = [
         image: "Seneca",
         fact: "Seneca the Younger was a tutor and advisor to the Roman emperor Nero.",
         id: 7,
+        favorite: false,
     },
     {
         quote: "Wealth consists not in having great possessions, but in having few wants.",
@@ -62,6 +69,7 @@ export const QUOTES = [
         image: "Epictetus",  // Placeholder for Epictetus
         fact: "Epictetus taught that philosophy is a way of life and emphasized the importance of inner freedom.",
         id: 8,
+        favorite: false,
     },
     {
         quote: "The world turns aside to let any man pass who knows where he is going.",
@@ -70,6 +78,7 @@ export const QUOTES = [
         image: "Seneca",
         fact: "Seneca the Younger was a prominent Stoic philosopher during the Roman Empire.",
         id: 9,
+        favorite: false,
     },
     {
         quote: "You have within you right now, everything you need to deal with whatever the world can throw at you.",
@@ -78,6 +87,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius is often considered one of the most important Stoic philosophers.",
         id: 10,
+        favorite: false,
     },
     {
         quote: "It's not what happens to you, but how you react to it that matters.",
@@ -86,6 +96,7 @@ export const QUOTES = [
         image: "Epictetus",  // Placeholder for Epictetus
         fact: "Epictetus taught that philosophy is a way of life and should be practiced daily.",
         id: 11,
+        favorite: false,
     },
     {
         quote: "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment.",
@@ -94,6 +105,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius was a practitioner of Stoicism and believed in the power of one's perception.",
         id: 12,
+        favorite: false,
     },
     {
         quote: "Don't explain your philosophy. Embody it.",
@@ -102,6 +114,7 @@ export const QUOTES = [
         image: "Epictetus",  // Placeholder for Epictetus
         fact: "Epictetus emphasized the importance of living in accordance with one's philosophy.",
         id: 13,
+        favorite: false,
     },
     {
         quote: "The more we value things outside our control, the less control we have.",
@@ -110,6 +123,7 @@ export const QUOTES = [
         image: "Epictetus",  // Placeholder for Epictetus
         fact: "Epictetus believed that true freedom comes from focusing on what is within our control.",
         id: 14,
+        favorite: false,
     },
     {
         quote: "The soul becomes dyed with the color of its thoughts.",
@@ -118,6 +132,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius was a philosopher-king, known for his Stoic reflections on life and virtue.",
         id: 15,
+        favorite: false,
     },
     {
         quote: "Choose not to be harmed, and you won't feel harmed. Don't feel harmed, and you haven't been.",
@@ -126,6 +141,7 @@ export const QUOTES = [
         image: "Marcus",
         fact: "Marcus Aurelius wrote his philosophical thoughts as personal reflections rather than for publication.",
         id: 16,
+        favorite: false,
     },
     {
         quote: "If it's endurable, then endure it. Stop complaining.",
@@ -134,6 +150,7 @@ export const QUOTES = [
         image: "Seneca",
         fact: "Seneca the Younger was a prominent Stoic philosopher, statesman, and tragedian.",
         id: 17,
+        favorite: false,
     },
     {
         quote: "It is not the man who has too little that is poor, but the one who hankers after more.",
@@ -142,6 +159,7 @@ export const QUOTES = [
         image: "Seneca",
         fact: "Seneca the Younger was a tutor and advisor to the Roman emperor Nero.",
         id: 18,
+        favorite: false,
     },
     {
         quote: "First say to yourself what you would be; and then do what you have to do.",
@@ -150,6 +168,7 @@ export const QUOTES = [
         image: "Epictetus",  // Placeholder for Epictetus
         fact: "Epictetus taught that the key to happiness is aligning our desires with our actions.",
         id: 19,
+        favorite: false,
     },
     {
         quote: "What really frightens and dismays us is not external events themselves, but the way in which we think about them.",
@@ -158,5 +177,6 @@ export const QUOTES = [
         image: "Epictetus",  // Placeholder for Epictetus
         fact: "Epictetus believed that our perception of events shapes our emotional responses.",
         id: 20,
+        favorite: false,
     },
 ];

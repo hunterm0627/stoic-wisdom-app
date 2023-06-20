@@ -5,11 +5,18 @@ import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY } from 
 import { normalize } from '../utils/scaleUtil';
 
 const SignUpScreen = ({ navigation }) => {
+
+    // useStates
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
+    const [error, setError] = useState('');
+
+
+    // navigation onPress events
 
     const handleTermsPress = () => {
         navigation.navigate('Terms');
@@ -20,85 +27,94 @@ const SignUpScreen = ({ navigation }) => {
     const handleLoginPress = () => {
         navigation.navigate('Login');
     };
-    
+
+    // Create Account button logic
+
     const handleSignUp = () => {
-        if (firstName && lastName && password && email && termsAccepted) {
-            Alert.alert('Sign up successful');
-        } else {
-            Alert.alert('Please fill in all fields and accept terms');
+        if (!firstName || !lastName || !email || !password || !termsAccepted) {
+            setError('Please fill in all fields and accept terms');
+            return;
         }
+
+        // Perform sign up logic
+        Alert.alert('Sign up successful');
+        navigation.navigate('Home');
+        // Log success
+        console.log('Sign Up was successful!')
     };
+
+    // Checkbox
 
     const toggleTermsAcceptance = () => {
         setTermsAccepted(!termsAccepted);
     };
-    
+
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Sign Up</Text> 
+            <Text style={styles.title}>Sign Up</Text>
             <TextInput
                 style={styles.input}
                 placeholder="First Name"
-                placeholderTextColor= {COLOR_ACCENT}
+                placeholderTextColor={COLOR_ACCENT}
                 value={firstName}
                 onChangeText={setFirstName}
-                />
-                <TextInput
+            />
+            <TextInput
                 style={styles.input}
                 placeholder="Last Name"
-                placeholderTextColor= {COLOR_ACCENT}
+                placeholderTextColor={COLOR_ACCENT}
                 value={lastName}
                 onChangeText={setLastName}
-                />
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Email"
-                placeholderTextColor= {COLOR_ACCENT}
+                placeholderTextColor={COLOR_ACCENT}
                 value={email}
                 onChangeText={setEmail}
-                />
+            />
             <TextInput
                 style={styles.input}
                 placeholder="Password"
-                placeholderTextColor= {COLOR_ACCENT}
+                placeholderTextColor={COLOR_ACCENT}
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
-                />
+            />
 
-            <TouchableOpacity
-                style={styles.checkboxContainer}
-                onPress={toggleTermsAcceptance}
-                >
+            <TouchableOpacity style={styles.checkboxContainer} onPress={toggleTermsAcceptance}>
                 {termsAccepted ? (
                     <Ionicons name="checkbox-outline" size={24} color={COLOR_SECONDARY} />
-                    ) : (
-                        <Ionicons name="square" size={24} color={COLOR_ACCENT} />
-                        )}
+                ) : (
+                    <Ionicons name="square" size={24} color={COLOR_ACCENT} />
+                )}
                 <Text style={styles.checkboxLabel}>
                     I agree to the{' '}
-                    <Text style={styles.textLink} onPress={handleTermsPress}>Terms & Conditions</Text>{' '}
+                    <Text style={styles.textLink} onPress={handleTermsPress}>
+                        Terms & Conditions
+                    </Text>{' '}
                     and{' '}
-                    <Text onPress={handlePolicyPress}>Privacy Policy</Text>
+                    <Text style={styles.textLink} onPress={handlePolicyPress}>
+                        Privacy Policy
+                    </Text>
                 </Text>
             </TouchableOpacity>
 
-            <Pressable title="Create Account" onPress={handleSignUp} style={styles.button} >
+            <Pressable title="Create Account" onPress={handleSignUp} style={styles.button}>
                 <Text style={styles.textBtn}>Create Account</Text>
             </Pressable>
 
-            <Text style={styles.text}>
-                Already have an account?{'  '}
-                <TouchableWithoutFeedback onPress={handleLoginPress} >
-                    <Text style={[styles.text, styles.linkText]}>Log in</Text>
-                </TouchableWithoutFeedback>
-            </Text>
+            {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
+                <Text style={styles.text}>
+                        Already have an account?{' '}
+                <Text style={styles.textLink} onPress={handleTermsPress}>
+                        Log in.
+                </Text>{' '}
+            </Text>
         </View>
     );
 };
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -113,11 +129,11 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR_PRIMARY,
     },
     title: {
-        fontSize: normalize(24),
-        fontWeight: 'bold',
+        fontSize: normalize(30),
+        color: 'white',
+        fontWeight: '500',
         marginBottom: normalize(16),
     },
-    // Checkbox 
     checkboxContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -129,7 +145,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: normalize(10),
     },
-    // inputs
     input: {
         width: '80%',
         height: normalize(40),
@@ -139,9 +154,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: normalize(20),
         borderRadius: normalize(20),
         fontSize: normalize(18),
-
     },
-    // button
     button: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -164,10 +177,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
         color: 'white',
     },
-    title: {
-        color: 'white',
-    },
-    linkText: {
+    textLink: {
         color: COLOR_SECONDARY,
         // fontWeight: '800',
     },
@@ -182,3 +192,4 @@ const styles = StyleSheet.create({
 });
 
 export default SignUpScreen;
+

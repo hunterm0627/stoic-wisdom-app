@@ -1,98 +1,78 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { normalize } from '../utils/scaleUtil';
-import { QUOTES } from '../shared/QUOTES';
 import { COLOR_HEART, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
 import * as AuthorImages from '../shared/authorImages';
-import Icon from 'react-native-vector-icons/FontAwesome'; // new import
-
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { QUOTES } from '../QUOTES';
 
 const Quotes = () => {
-    const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
-    const [prevQuotes, setPrevQuotes] = useState([]);
-    const [favorites, setFavorites] = useState([]); // new state variable for favorites
-    
+  const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
+  const [prevQuotes, setPrevQuotes] = useState([]);
+  const [favoriteQuotes, setFavoriteQuotes] = useState([]);
 
-    useEffect(() => {
-        const quote = QUOTES[quoteIndex];
+  useEffect(() => {
+    const quote = QUOTES[quoteIndex];
 
-        // Update the previous quotes state
-        setPrevQuotes((prevQuotes) => {
-            if (prevQuotes.length >= QUOTES.length) {
-                // If all quotes have been shown, start with a new array containing the current quote
-                return [quote.quote];
-            } else {
-                // Otherwise, add the current quote to the existing array of previous quotes
-                return [...prevQuotes, quote.quote];
-            }
-        });
-    }, [quoteIndex]);
+    setPrevQuotes((prevQuotes) => {
+      if (prevQuotes.length >= QUOTES.length) {
+        return [quote.quote];
+      } else {
+        return [...prevQuotes, quote.quote];
+      }
+    });
+  }, [quoteIndex]);
 
-    const getRandomQuote = () => {
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * QUOTES.length);
-        } while (prevQuotes.includes(QUOTES[newIndex].id)); // Check if the quote ID exists in prevQuotes
-        setQuoteIndex(newIndex);
-    };
+  const getRandomQuote = () => {
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * QUOTES.length);
+    } while (prevQuotes.includes(QUOTES[newIndex].id));
+    setQuoteIndex(newIndex);
+  };
 
-    const toggleFavorite = () => {
-        const quote = QUOTES[quoteIndex];
+  const toggleFavorite = () => {
+    const quote = QUOTES[quoteIndex];
 
-        // Toggle the favorites state
-        setFavorites((prevFavorites) => {
-            // Check if the current quote is already in the favorites array
-            if (prevFavorites.some((favorite) => favorite.id === quote.id)) {
-                // If it is, remove it from the favorites array
-                return prevFavorites.filter((favorite) => favorite.id !== quote.id);
-            } else {
-                // If it is not, add it to the favorites array
-                return [...prevFavorites, quote];
-            }
-        });
+    if (favoriteQuotes.some((favorite) => favorite.id === quote.id)) {
+      setFavoriteQuotes((prevFavoriteQuotes) =>
+        prevFavoriteQuotes.filter((favorite) => favorite.id !== quote.id)
+      );
+    } else {
+      setFavoriteQuotes((prevFavoriteQuotes) => [...prevFavoriteQuotes, quote]);
+    }
+  };
 
-        // Log whether the quote has been favorited or unfavorited
-        console.log(
-            `Quote ${quote.id} ${favorites.some((favorite) => favorite.id === quote.id) ? 'favorited' : 'unfavorited'
-            }`
-        );
-    };
+  const { quote, firstName, lastName, image } = QUOTES[quoteIndex];
+  const ImageComponent = AuthorImages[image] || AuthorImages.defaultImg;
 
-    const { quote, firstName, lastName, image } = QUOTES[quoteIndex];
-    const ImageComponent = AuthorImages[image] || AuthorImages.defaultImg;
-
-    const isFavorite = favorites.some((favorite) => favorite.id === QUOTES[quoteIndex].id); // check if the current quote is favorited
+  const isFavorite = favoriteQuotes.some((favorite) => favorite.id === QUOTES[quoteIndex].id);
 
     return (
         <View style={styles.container}>
-
             <View style={styles.quoteContainer}>
                 <Image source={ImageComponent} style={styles.image} resizeMode="cover" />
                 <View style={styles.quoteTextContainer}>
-                    <View style={styles.quoteWrapper} >
-                        <Text style={styles.quoteText} adjustsFontSizeToFit >{quote}</Text>
+                    <View style={styles.quoteWrapper}>
+                        <Text style={styles.quoteText} adjustsFontSizeToFit>
+                            {quote}
+                        </Text>
                     </View>
                     <Text style={styles.authorText}>
                         <Text style={styles.lastNameText}>{firstName}</Text> {lastName}
                     </Text>
                 </View>
             </View>
-            <Image
-                style={styles.leafIcon}
-                source={require('../assets/images/leafIcon.png')}
-            />
+            <Image style={styles.leafIcon} source={require('../assets/images/leafIcon.png')} />
             <Pressable onPress={getRandomQuote} style={styles.button}>
                 <Text style={styles.text}>Inspire Me!</Text>
             </Pressable>
             <Pressable onPress={toggleFavorite}>
                 <Icon style={styles.favIcon} name={isFavorite ? 'heart' : 'heart-o'} />
             </Pressable>
-
         </View>
     );
 };
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -112,11 +92,10 @@ const styles = StyleSheet.create({
         marginBottom: normalize(10),
     },
     quoteWrapper: {
-        height: normalize(250), // Set a fixed height for the quote text container
+        height: normalize(250),
         justifyContent: 'space-around',
     },
     quoteTextContainer: {
-        //   flex: 1, // Allow the container to expand within the quoteWrapper
         alignItems: 'center',
         paddingHorizontal: normalize(20),
         marginBottom: normalize(5),
@@ -128,13 +107,12 @@ const styles = StyleSheet.create({
     },
     authorText: {
         fontSize: normalize(18),
-        // textTransform: 'uppercase',
         color: COLOR_SECONDARY,
         marginTop: normalize(10),
-        fontWeight: '500', // Thinner font weight for the first name
+        fontWeight: '500',
     },
     lastNameText: {
-        fontWeight: '300', // Heavier font weight for the last name
+        fontWeight: '300',
     },
     button: {
         alignItems: 'center',
@@ -144,6 +122,7 @@ const styles = StyleSheet.create({
         borderRadius: normalize(50),
         elevation: normalize(3),
         backgroundColor: COLOR_SECONDARY,
+        marginVertical: normalize(10),
     },
     text: {
         fontSize: normalize(16),

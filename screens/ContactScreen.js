@@ -3,6 +3,7 @@ import { Button, TextInput, View, StyleSheet, Pressable, TouchableOpacity } from
 import { COLOR_PRIMARY, COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_SECONDARY } from '../shared/colors'
 // import { Card } from 'react-native-elements';
 import { Card, Text } from '@rneui/themed';
+import { normalize } from '../utils/scaleUtil';
 
 
 const ContactScreen = () => {
@@ -37,7 +38,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: COLOR_SECONDARY,
+        backgroundColor: COLOR_SECONDARY,
         
     },
     text: {
@@ -45,47 +46,47 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'left',
-        marginLeft: '10%',
+        marginLeft: normalize(10),
         marginVertical: '5%',
-        letterSpacing: 4,
+        letterSpacing: normalize(4),
         color: 'white',
     },
     h4: {
-        fontSize: 28,
+        fontSize: normalize(28),
         marginHorizontal: '10%',
         fontWeight: '400',
         color: 'slategray',
-        letterSpacing: 2,
-        lineHeight: 45,
+        letterSpacing: normalize(2),
+        lineHeight: normalize(45),
     },
     dividerStyle: {
         backgroundColor: COLOR_SECONDARY, // Customize the color of the divider
-        height: 15, // Customize the height of the divider
-        marginVertical: 10, // Add vertical margin to the divider
+        height: normalize(15), // Customize the height of the divider
+        marginVertical: normalize(10), // Add vertical margin to the divider
         width: '80%',
         alignSelf: 'center',
-        marginTop: 30,
+        marginTop: normalize(30),
     },
     submitBtn: {
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 100,
-        borderRadius: 50,
-        elevation: 3,
+        paddingVertical: normalize(12),
+        paddingHorizontal: normalize(100),
+        borderRadius: normalize(50),
+        elevation: normalize(3),
         backgroundColor: 'white',
         width: '80%',
     },
     input: {
         width: '80%',
-        height: 40,
+        height: normalize(40),
         // borderWidth: 1,
         // borderColor: 'gray',
         color: COLOR_ACCENT,
         backgroundColor: 'white',
-        marginVertical: 20,
-        paddingHorizontal: 20,
-        borderRadius: 20,
+        marginVertical: normalize(20),
+        paddingHorizontal: normalize(20),
+        borderRadius: normalize(20),
     },
 });
 
