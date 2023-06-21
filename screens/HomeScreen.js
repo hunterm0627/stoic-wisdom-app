@@ -7,46 +7,46 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { QUOTES } from '../QUOTES';
 
 const Quotes = () => {
-  const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
-  const [prevQuotes, setPrevQuotes] = useState([]);
-  const [favoriteQuotes, setFavoriteQuotes] = useState([]);
+    const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
+    const [prevQuotes, setPrevQuotes] = useState([]);
+    const [favoriteQuotes, setFavoriteQuotes] = useState([]);
 
-  useEffect(() => {
-    const quote = QUOTES[quoteIndex];
+    useEffect(() => {
+        const quote = QUOTES[quoteIndex];
 
-    setPrevQuotes((prevQuotes) => {
-      if (prevQuotes.length >= QUOTES.length) {
-        return [quote.quote];
-      } else {
-        return [...prevQuotes, quote.quote];
-      }
-    });
-  }, [quoteIndex]);
+        setPrevQuotes((prevQuotes) => {
+            if (prevQuotes.length >= QUOTES.length) {
+                return [quote.quote];
+            } else {
+                return [...prevQuotes, quote.quote];
+            }
+        });
+    }, [quoteIndex]);
 
-  const getRandomQuote = () => {
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * QUOTES.length);
-    } while (prevQuotes.includes(QUOTES[newIndex].id));
-    setQuoteIndex(newIndex);
-  };
+    const getRandomQuote = () => {
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * QUOTES.length);
+        } while (prevQuotes.includes(QUOTES[newIndex].id));
+        setQuoteIndex(newIndex);
+    };
 
-  const toggleFavorite = () => {
-    const quote = QUOTES[quoteIndex];
+    const toggleFavorite = () => {
+        const quote = QUOTES[quoteIndex];
 
-    if (favoriteQuotes.some((favorite) => favorite.id === quote.id)) {
-      setFavoriteQuotes((prevFavoriteQuotes) =>
-        prevFavoriteQuotes.filter((favorite) => favorite.id !== quote.id)
-      );
-    } else {
-      setFavoriteQuotes((prevFavoriteQuotes) => [...prevFavoriteQuotes, quote]);
-    }
-  };
+        if (favoriteQuotes.some((favorite) => favorite.id === quote.id)) {
+            setFavoriteQuotes((prevFavoriteQuotes) =>
+                prevFavoriteQuotes.filter((favorite) => favorite.id !== quote.id)
+            );
+        } else {
+            setFavoriteQuotes((prevFavoriteQuotes) => [...prevFavoriteQuotes, quote]);
+        }
+    };
 
-  const { quote, firstName, lastName, image } = QUOTES[quoteIndex];
-  const ImageComponent = AuthorImages[image] || AuthorImages.defaultImg;
+    const { quote, firstName, lastName, image } = QUOTES[quoteIndex];
+    const ImageComponent = AuthorImages[image] || AuthorImages.defaultImg;
 
-  const isFavorite = favoriteQuotes.some((favorite) => favorite.id === QUOTES[quoteIndex].id);
+    const isFavorite = favoriteQuotes.some((favorite) => favorite.id === QUOTES[quoteIndex].id);
 
     return (
         <View style={styles.container}>

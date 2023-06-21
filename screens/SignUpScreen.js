@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, Alert, Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_PRIMARY, GRADIENT_SECONDARY } from '../shared/colors';
 import { normalize } from '../utils/scaleUtil';
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientButton from '../components/GradientButton';
 
 const SignUpScreen = ({ navigation }) => {
 
@@ -50,7 +52,7 @@ const SignUpScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <LinearGradient style={styles.container} colors={GRADIENT_PRIMARY} >
             <Text style={styles.title}>Sign Up</Text>
             <TextInput
                 style={styles.input}
@@ -99,10 +101,17 @@ const SignUpScreen = ({ navigation }) => {
                     </Text>
                 </Text>
             </TouchableOpacity>
+            
+            <GradientButton
+                title="Create Account"
+                colors={GRADIENT_SECONDARY}
+                onPress={handleSignUp}
+                style={{ marginTop: normalize(20), marginBottom: normalize(20), width: '70%' }}
+            />
 
-            <Pressable title="Create Account" onPress={handleSignUp} style={styles.button}>
+            {/* <Pressable title="Create Account" onPress={handleSignUp} style={styles.button}>
                 <Text style={styles.textBtn}>Create Account</Text>
-            </Pressable>
+            </Pressable> */}
 
             {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -112,7 +121,7 @@ const SignUpScreen = ({ navigation }) => {
                         Log in.
                 </Text>{' '}
             </Text>
-        </View>
+        </LinearGradient>
     );
 };
 
@@ -120,19 +129,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         padding: normalize(16),
-        backgroundColor: COLOR_PRIMARY,
-    },
-    bgShift: {
-        flex: 1,
         backgroundColor: COLOR_PRIMARY,
     },
     title: {
         fontSize: normalize(30),
         color: 'white',
         fontWeight: '500',
-        marginBottom: normalize(16),
+        marginVertical: normalize(16),
     },
     checkboxContainer: {
         flexDirection: 'row',
@@ -146,7 +151,7 @@ const styles = StyleSheet.create({
         fontSize: normalize(10),
     },
     input: {
-        width: '80%',
+        width: '85%',
         height: normalize(40),
         color: COLOR_ACCENT,
         backgroundColor: COLOR_INPUT_LIGHT,

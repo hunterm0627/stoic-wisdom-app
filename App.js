@@ -23,18 +23,99 @@ import TermsScreen from './screens/TermsScreen';
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+// Main Stack Navigation
+
+function App() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName='StartScreen'>
+                <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }} />
+                <Stack.Screen name='SignUp' component={SignUpScreen} />
+                <Stack.Screen name='Login' component={LoginScreen} />
+                <Stack.Screen name ='Policy' component={PolicyScreen} />
+                <Stack.Screen name ='Terms' component={TermsScreen} />
+                <Stack.Screen name='Home' component={HomeDrawer} options={{ headerShown: false }} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}
+
+// Drawer Menu
+
+function HomeDrawer() {
+    return (
+        <Drawer.Navigator
+        screenOptions={{ drawerStyle: { backgroundColor: '#fff', width: '70%' } }}
+        initialRouteName="StartScreen"
+        drawerContent={props => <CustomDrawerContent {...props} />}
+        >
+            <Drawer.Screen
+                name="Dashboard"
+                component={HomeScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>Dashboard</Text>
+                        )
+                    }}
+                    />
+            <Drawer.Screen
+                name="Favorites"
+                component={FavoritesScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>Favorites</Text>
+                        )
+                    }}
+                    />
+            <Drawer.Screen
+                name="About"
+                component={AboutScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>About</Text>
+                        )
+                    }}
+                    />
+            <Drawer.Screen
+                name="Contact"
+                component={ContactScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>Contact</Text>
+                        )
+                    }}
+                    />
+            <Drawer.Screen
+                name="User"
+                component={UserScreen}
+                options={{
+                    drawerLabel: () => (
+                        <Text style={styles.drawerText}>User</Text>
+                        )
+                    }}
+                    />
+        </Drawer.Navigator>
+    );
+}
+
+
 function CustomDrawerContent(props) {
     const navigation = useNavigation();
 
+    // additional menu buttons go here
+
     return (
         <DrawerContentScrollView {...props}>
+            
             <View style={styles.drawerHeader}>
                 <Image
                     source={require('./assets/images/default.png')} 
                     style={styles.drawerImage}
                 />
             </View>
+
             <DrawerItemList {...props} />
+
             <DrawerItem
                 label="Help"
                 onPress={() => alert('Link to help')}
@@ -51,77 +132,6 @@ function CustomDrawerContent(props) {
             // Add your own styling here
             />
         </DrawerContentScrollView>
-    );
-}
-
-function HomeDrawer() {
-    return (
-        <Drawer.Navigator
-            screenOptions={{ drawerStyle: { backgroundColor: '#fff', width: '70%' } }}
-            initialRouteName="StartScreen"
-            drawerContent={props => <CustomDrawerContent {...props} />}
-        >
-            <Drawer.Screen
-                name="Dashboard"
-                component={HomeScreen}
-                options={{
-                    drawerLabel: () => (
-                        <Text style={styles.drawerText}>Dashboard</Text>
-                    )
-                }}
-            />
-            <Drawer.Screen
-                name="Favorites"
-                component={FavoritesScreen}
-                options={{
-                    drawerLabel: () => (
-                        <Text style={styles.drawerText}>Favorites</Text>
-                    )
-                }}
-            />
-            <Drawer.Screen
-                name="About"
-                component={AboutScreen}
-                options={{
-                    drawerLabel: () => (
-                        <Text style={styles.drawerText}>About</Text>
-                    )
-                }}
-            />
-            <Drawer.Screen
-                name="Contact"
-                component={ContactScreen}
-                options={{
-                    drawerLabel: () => (
-                        <Text style={styles.drawerText}>Contact</Text>
-                    )
-                }}
-            />
-            <Drawer.Screen
-                name="User"
-                component={UserScreen}
-                options={{
-                    drawerLabel: () => (
-                        <Text style={styles.drawerText}>User</Text>
-                    )
-                }}
-            />
-        </Drawer.Navigator>
-    );
-}
-
-function App() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName='StartScreen'>
-                <Stack.Screen name='StartScreen' component={StartScreen} options={{ headerShown: false }} />
-                <Stack.Screen name='SignUp' component={SignUpScreen} />
-                <Stack.Screen name='Login' component={LoginScreen} />
-                <Stack.Screen name ='Policy' component={PolicyScreen} />
-                <Stack.Screen name ='Terms' component={TermsScreen} />
-                <Stack.Screen name='Home' component={HomeDrawer} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </NavigationContainer>
     );
 }
 
@@ -151,5 +161,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
-

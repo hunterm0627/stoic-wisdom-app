@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Pressable, Text, StyleSheet, TextInput, Alert, TouchableWithoutFeedback } from 'react-native';
-import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
 import { Input } from '@rneui/themed';
 import { normalize } from '../utils/scaleUtil';
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientButton from '../components/GradientButton';
 
 const LoginScreen = ({ route, navigation }) => {
     /* 2. Get the param */
@@ -28,7 +30,7 @@ const LoginScreen = ({ route, navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <LinearGradient style={styles.container} colors={GRADIENT_PRIMARY}>
             <View style={styles.absoluteText}>
                 <Text style={styles.titleStoic}>STOIC</Text>
                 <Text style={styles.titleWisdom}>WISDOM</Text>
@@ -48,9 +50,12 @@ const LoginScreen = ({ route, navigation }) => {
                 value={password}
                 onChangeText={setPassword}
             />
-            <Pressable title="Login" onPress={handleLogin} style={styles.button} TouchableOpacity>
-                <Text style={styles.textBtn}>Login</Text>
-            </Pressable>
+            <GradientButton
+                title="Login"
+                colors={GRADIENT_SECONDARY}
+                onPress={() => { navigation.navigate('Home') }}
+                style={{ marginTop: 20, width: '70%' }}
+            />
 
             <TouchableWithoutFeedback onPress={handleLoginPress} >
                     <Text style={styles.textForgot}>Forgot Password?</Text>
@@ -63,7 +68,7 @@ const LoginScreen = ({ route, navigation }) => {
                 </TouchableWithoutFeedback>
             </Text>
 
-        </View>
+        </LinearGradient>
     );
 };
 

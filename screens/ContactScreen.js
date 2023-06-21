@@ -1,68 +1,145 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View, StyleSheet, Pressable, TouchableOpacity } from 'react-native';
-import { COLOR_PRIMARY, COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_SECONDARY } from '../shared/colors'
-// import { Card } from 'react-native-elements';
-import { Card, Text } from '@rneui/themed';
+import { Button, TextInput, View, StyleSheet, Pressable, TouchableOpacity, Alert } from 'react-native';
+import { COLOR_PRIMARY, COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_WHITE, GRADIENT_PRIMARY } from '../shared/colors'
+import { Text } from '@rneui/themed';
 import { normalize } from '../utils/scaleUtil';
-
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientButton from '../components/GradientButton';
 
 const ContactScreen = () => {
+    // State variables for form input values and error flags
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [nameError, setNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [messageError, setMessageError] = useState(false);
 
+    // Form submit handler
     const handleSubmit = () => {
-        // Handle submit
+        let hasError = false;
+
+        // Validate input fields
+        if (!name) {
+            setNameError(true);
+            hasError = true;
+        } else {
+            setNameError(false);
+        }
+
+        if (!email) {
+            setEmailError(true);
+            hasError = true;
+        } else {
+            setEmailError(false);
+        }
+
+        if (!message) {
+            setMessageError(true);
+            hasError = true;
+        } else {
+            setMessageError(false);
+        }
+
+        // Show error alert if there are validation errors
+        if (hasError) {
+            Alert.alert(
+                'Error',
+                'Please fill in all required fields.',
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') }
+                ]
+            );
+        } else {
+            // Show success alert and clear form on successful submission
+            Alert.alert(
+                'Message Sent',
+                'Your message has been submitted successfully.',
+                [
+                    { text: 'OK', onPress: () => console.log('OK Pressed') }
+                ]
+            );
+
+            setName('');
+            setEmail('');
+            setMessage('');
+        }
     };
 
-    return ( 
-        <View style={styles.container}>
+    return (
+        <LinearGradient style={styles.container} colors={GRADIENT_SECONDARY}>
+            {/* Contact Us title */}
             <Text h1 style={styles.title}>Contact Us</Text>
-            <Text style={styles.text}>Questions or concerns?</Text>
-            <Text style={styles.text}>Feel free to reach out!</Text>
-            <TextInput style={styles.input} placeholder="Name" onChangeText={setName}  />
-            <TextInput style={styles.input} placeholder="Email" onChangeText={setEmail}  />
-            <TextInput style={styles.input} placeholder="Message..." onChangeText={setMessage} multiline />
 
-            <TouchableOpacity activeOpacity={0.7} onPress={handleSubmit}>
-                <Pressable title="Submit" style={styles.submitBtn}>
-                    <Text>Submit</Text>
-                </Pressable>
-            </TouchableOpacity>
-        </View>
+            {/* Subtext */}
+            <View style={styles.subText}>
+                <Text style={styles.text}>Questions or concerns?</Text>
+                <Text style={styles.text}>Feel free to reach out!</Text>
+            </View>
+
+            {/* Name input field */}
+            <TextInput
+                style={[styles.input, nameError && styles.inputError]}
+                placeholder="Name"
+                value={name}
+                onChangeText={setName}
+            />
+            {nameError && <Text style={styles.errorText}>Please enter your name</Text>}
+
+            {/* Email input field */}
+            <TextInput
+                style={[styles.input, emailError && styles.inputError]}
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
+            />
+            {emailError && <Text style={styles.errorText}>Please enter a valid email</Text>}
+
+            {/* Message input field */}
+            <TextInput
+                style={[styles.input, styles.messageInput, messageError && styles.inputError]}
+                placeholder="Message..."
+                value={message}
+                onChangeText={setMessage}
+                multiline
+            />
+            {messageError && <Text style={styles.errorText}>Please enter your message</Text>}
+
+            {/* Submit button */}
+            <GradientButton
+                title="Submit"
+                colors={GRADIENT_PRIMARY}
+                onPress={handleSubmit}
+                style={{ marginTop: normalize(20), width: '80%' }}
+            />
+        </LinearGradient>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start', // Align content at the top
         alignItems: 'center',
-        backgroundColor: COLOR_SECONDARY,
-        
     },
     text: {
         color: 'white',
     },
+    subText: {
+        color: 'white',
+        marginBottom: normalize(10),
+    },
     title: {
-        textAlign: 'left',
-        marginLeft: normalize(10),
-        marginVertical: '5%',
+        fontSize: normalize(35),
+        marginTop: normalize(20),
         letterSpacing: normalize(4),
+        fontWeight: '600',
         color: 'white',
     },
-    h4: {
-        fontSize: normalize(28),
-        marginHorizontal: '10%',
-        fontWeight: '400',
-        color: 'slategray',
-        letterSpacing: normalize(2),
-        lineHeight: normalize(45),
-    },
     dividerStyle: {
-        backgroundColor: COLOR_SECONDARY, // Customize the color of the divider
-        height: normalize(15), // Customize the height of the divider
-        marginVertical: normalize(10), // Add vertical margin to the divider
+        backgroundColor: COLOR_SECONDARY,
+        height: normalize(15),
+        marginVertical: normalize(10),
         width: '80%',
         alignSelf: 'center',
         marginTop: normalize(30),
@@ -80,13 +157,26 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: normalize(40),
-        // borderWidth: 1,
-        // borderColor: 'gray',
         color: COLOR_ACCENT,
         backgroundColor: 'white',
-        marginVertical: normalize(20),
+        marginVertical: normalize(10),
         paddingHorizontal: normalize(20),
         borderRadius: normalize(20),
+    },
+    inputError: {
+        borderColor: 'darkred',
+        borderWidth: normalize(3),
+    },
+    messageInput: {
+        height: normalize(120),
+        textAlignVertical: 'top',
+        padding: normalize(15),
+    },
+    errorText: {
+        color: 'white',
+        backgroundColor: 'darkred',
+        fontSize: normalize(12),
+        padding: normalize(5),
     },
 });
 

@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Pressable, Image } from 'react-native';
-import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
 import { normalize } from '../utils/scaleUtil';
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientButton from '../components/GradientButton';
+
 
 const StartScreen = ({ navigation }) => {
     return (
-        <View style={styles.container}>
+        <LinearGradient style={styles.container} colors={GRADIENT_PRIMARY}>
             <Text style={styles.titleStoic}>STOIC</Text>
             <Text style={styles.titleWisdom}>WISDOM</Text>
             <Image
@@ -15,38 +18,24 @@ const StartScreen = ({ navigation }) => {
             <Text style={styles.subtitle}>Mastering the art of tranquility,</Text>
             <Text style={styles.subtitle}>one quote at a time.</Text>
 
-
             {/* Login Button */}
 
-            <TouchableOpacity
-                activeOpacity={0.7}
-                style={styles.loginBtn}
-                onPress={() => {
-                    navigation.navigate('Login', {
-                        itemId: 86,
-                        otherParam: 'anything you want here',
-                    });
-                }}
-            >
-                <Text style={styles.text}>Login</Text>
-            </TouchableOpacity>
+            <GradientButton
+                title="Login"
+                colors={GRADIENT_SECONDARY}
+                onPress={() => { navigation.navigate('Login') }}
+                style={{ marginTop: 20, width: '70%' }}
+            />
 
             {/* Sign Up Button */}
 
             <TouchableOpacity
                 activeOpacity={0.7}
                 style={styles.signUpBtn}
-                onPress={() => {
-                    navigation.navigate('SignUp', {
-                        itemId: 86,
-                        otherParam: 'anything you want here',
-                    });
-                }}
-            >
+                onPress={() => {navigation.navigate('SignUp')}}>
                 <Text style={styles.text}>Sign Up</Text>
             </TouchableOpacity>
-
-        </View>
+        </LinearGradient>
     );
 };
 
@@ -59,7 +48,7 @@ const styles = StyleSheet.create({
     },
     // Title styling
     titleStoic: {
-        fontSize: normalize(73),
+        fontSize: normalize(80),
         fontWeight: '800',
         marginBottom: normalize(-28),
         color: 'white',
@@ -67,7 +56,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center'
     },
     titleWisdom: {
-        fontSize: normalize(50),
+        fontSize: normalize(55),
         fontWeight: '100',
         marginBottom: normalize(5),
         color: 'white',
@@ -89,17 +78,17 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: COLOR_SECONDARY,
     },
-    loginBtn: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: normalize(10),
-        paddingHorizontal: normalize(40),
-        borderRadius: normalize(50),
-        marginTop: normalize(20),
-        elevation: 3,
-        backgroundColor: COLOR_SECONDARY,
-        width: '68%',
-    },
+    // loginBtn: {
+        // alignItems: 'center',
+        // justifyContent: 'center',
+        // paddingVertical: normalize(10),
+        // paddingHorizontal: normalize(40),
+        // borderRadius: normalize(50),
+        // marginTop: normalize(20),
+        // elevation: 3,
+        // backgroundColor: COLOR_SECONDARY,
+        // width: '80%',
+    // },
     signUpBtn: {
         alignItems: 'center',
         justifyContent: 'center',
