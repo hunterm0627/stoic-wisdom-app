@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, Alert, Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_PRIMARY, GRADIENT_SECONDARY } from '../shared/colors';
 import { normalize } from '../utils/scaleUtil';
@@ -32,17 +33,29 @@ const SignUpScreen = ({ navigation }) => {
 
     // Create Account button logic
 
-    const handleSignUp = () => {
+    const signUpUser = async () => {
         if (!firstName || !lastName || !email || !password || !termsAccepted) {
             setError('Please fill in all fields and accept terms');
             return;
         }
 
-        // Perform sign up logic
-        Alert.alert('Sign up successful');
-        navigation.navigate('Home');
-        // Log success
-        console.log('Sign Up was successful!')
+        const userProfile = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password, // Note: It's not secure to store passwords in AsyncStorage in a production app
+        };
+
+        console.log(userProfile);
+
+        try {
+            await AsyncStorage.setItem('userProfile', JSON.stringify(userProfile));
+            Alert.alert('Sign up successful');
+            navigation.navigate('Home');
+            console.log('Sign Up was successful!');
+        } catch (error) {
+            console.log('Error during sign up:', error);
+        }
     };
 
     // Checkbox
@@ -103,11 +116,11 @@ const SignUpScreen = ({ navigation }) => {
             </TouchableOpacity>
             
             <GradientButton
-                title="Create Account"
-                colors={GRADIENT_SECONDARY}
-                onPress={handleSignUp}
-                style={{ marginTop: normalize(20), marginBottom: normalize(20), width: '70%' }}
-            />
+            title="Create Account"
+            colors={GRADIENT_SECONDARY}
+            onPress={signUpUser}
+            style={{ marginTop: normalize(20), marginBottom: normalize(20), width: '70%' }}
+        />
 
             {/* <Pressable title="Create Account" onPress={handleSignUp} style={styles.button}>
                 <Text style={styles.textBtn}>Create Account</Text>

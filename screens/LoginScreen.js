@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Pressable, Text, StyleSheet, TextInput, Alert, TouchableWithoutFeedback } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
 import { Input } from '@rneui/themed';
 import { normalize } from '../utils/scaleUtil';
@@ -16,16 +17,26 @@ const LoginScreen = ({ route, navigation }) => {
     const handleSignUpPress = () => {
         navigation.navigate('SignUp');
     };
+
     const handleLoginPress = () => {
         navigation.navigate('Login');
     };
 
-    const handleLogin = () => {
-        // Perform login logic here
-        if (email === '' && password === '') {
-            navigation.navigate('Home');
-        } else {
-            Alert.alert('Invalid email or password');
+    const loginUser = async () => {
+        try {
+            const userProfileJSON = await AsyncStorage.getItem('userProfile');
+            if (userProfileJSON !== null) {
+                const userProfile = JSON.parse(userProfileJSON);
+                if (userProfile.email === email) {
+                    navigation.navigate('Home');
+                } else {
+                    Alert.alert('Invalid user', 'User does not exist. Please sign up.');
+                }
+            } else {
+                Alert.alert('No users', 'No users exist. Please sign up.');
+            }
+        } catch (error) {
+            console.log('Error during login:', error);
         }
     };
 
@@ -53,7 +64,7 @@ const LoginScreen = ({ route, navigation }) => {
             <GradientButton
                 title="Login"
                 colors={GRADIENT_SECONDARY}
-                onPress={() => { navigation.navigate('Home') }}
+                onPress={loginUser}
                 style={{ marginTop: 20, width: '70%' }}
             />
 

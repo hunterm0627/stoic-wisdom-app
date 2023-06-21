@@ -18,6 +18,7 @@ import ContactScreen from './screens/ContactScreen';
 import StartScreen from './screens/StartScreen';
 import PolicyScreen from './screens/PolicyScreen';
 import TermsScreen from './screens/TermsScreen';
+import ProfileScreen from './screens/ProfileScreen';
 
 
 const Stack = createStackNavigator();
@@ -86,11 +87,11 @@ function HomeDrawer() {
                     }}
                     />
             <Drawer.Screen
-                name="User"
-                component={UserScreen}
+                name="Profile"
+                component={ProfileScreen}
                 options={{
                     drawerLabel: () => (
-                        <Text style={styles.drawerText}>User</Text>
+                        <Text style={styles.drawerText}>Profile</Text>
                         )
                     }}
                     />
@@ -129,6 +130,11 @@ function CustomDrawerContent(props) {
             <DrawerItem 
                 label="Privacy Policy"
                 onPress={() => navigation.navigate('Policy')}
+            // Add your own styling here
+            />
+            <DrawerItem 
+                label="Log Out"
+                onPress={() => navigation.navigate('Login')}
             // Add your own styling here
             />
         </DrawerContentScrollView>

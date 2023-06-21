@@ -5,11 +5,16 @@ import { COLOR_HEART, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
 import * as AuthorImages from '../shared/authorImages';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { QUOTES } from '../QUOTES';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Quotes = () => {
     const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
     const [prevQuotes, setPrevQuotes] = useState([]);
     const [favoriteQuotes, setFavoriteQuotes] = useState([]);
+
+    useEffect(() => {
+        retrieveFavoriteQuotes();
+    }, []);
 
     useEffect(() => {
         const quote = QUOTES[quoteIndex];
@@ -22,6 +27,29 @@ const Quotes = () => {
             }
         });
     }, [quoteIndex]);
+
+    useEffect(() => {
+        saveFavoriteQuotes();
+    }, [favoriteQuotes]);
+
+    const retrieveFavoriteQuotes = async () => {
+        try {
+            const favoriteQuotesJSON = await AsyncStorage.getItem('favoriteQuotes');
+            if (favoriteQuotesJSON !== null) {
+                setFavoriteQuotes(JSON.parse(favoriteQuotesJSON));
+            }
+        } catch (error) {
+            console.log('Error retrieving favorite quotes:', error);
+        }
+    };
+
+    const saveFavoriteQuotes = async () => {
+        try {
+            await AsyncStorage.setItem('favoriteQuotes', JSON.stringify(favoriteQuotes));
+        } catch (error) {
+            console.log('Error saving favorite quotes:', error);
+        }
+    };
 
     const getRandomQuote = () => {
         let newIndex;
