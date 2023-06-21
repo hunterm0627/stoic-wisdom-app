@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
 import { normalize } from '../utils/scaleUtil';
-import { COLOR_HEART, COLOR_PRIMARY, COLOR_SECONDARY } from '../shared/colors';
+import { COLOR_HEART, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_WHITE } from '../shared/colors';
 import * as AuthorImages from '../shared/authorImages';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { QUOTES } from '../QUOTES';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
+import GradientButton from '../components/GradientButton';
 
 const Quotes = () => {
     const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
@@ -77,7 +79,7 @@ const Quotes = () => {
     const isFavorite = favoriteQuotes.some((favorite) => favorite.id === QUOTES[quoteIndex].id);
 
     return (
-        <View style={styles.container}>
+        <LinearGradient style={styles.container} colors={GRADIENT_WHITE}>
             <View style={styles.quoteContainer}>
                 <Image source={ImageComponent} style={styles.image} resizeMode="cover" />
                 <View style={styles.quoteTextContainer}>
@@ -92,13 +94,21 @@ const Quotes = () => {
                 </View>
             </View>
             <Image style={styles.leafIcon} source={require('../assets/images/leafIcon.png')} />
-            <Pressable onPress={getRandomQuote} style={styles.button}>
+
+            <GradientButton
+                title="Inspire Me!"
+                colors={GRADIENT_SECONDARY}
+                onPress={getRandomQuote}
+                style={{ marginVertical: normalize(2), width: '50%' }}
+            />
+
+            {/* <Pressable onPress={getRandomQuote} style={styles.button}>
                 <Text style={styles.text}>Inspire Me!</Text>
-            </Pressable>
+            </Pressable> */}
             <Pressable onPress={toggleFavorite}>
                 <Icon style={styles.favIcon} name={isFavorite ? 'heart' : 'heart-o'} />
             </Pressable>
-        </View>
+        </LinearGradient>
     );
 };
 
@@ -161,14 +171,14 @@ const styles = StyleSheet.create({
     },
     favIcon: {
         color: COLOR_HEART,
-        fontSize: normalize(30),
+        fontSize: normalize(40),
         marginTop: normalize(20),
     },
     leafIcon: {
         height: normalize(50),
         width: normalize(50),
         resizeMode: 'contain',
-        marginBottom: normalize(10),
+        // marginBottom: normalize(10),
         opacity: 0.8,
     },
 });

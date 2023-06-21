@@ -96,7 +96,7 @@ const styles = {
     },
     favoriteItem: {
         fontSize: 18,
-        marginBottom: 10,
+        // marginBottom: 10,
         padding: 10,
         backgroundColor: '#fff',
     },

@@ -130,7 +130,7 @@ const SignUpScreen = ({ navigation }) => {
 
                 <Text style={styles.text}>
                         Already have an account?{' '}
-                <Text style={styles.textLink} onPress={handleTermsPress}>
+                <Text style={styles.textLink} onPress={handleLoginPress}>
                         Log in.
                 </Text>{' '}
             </Text>
