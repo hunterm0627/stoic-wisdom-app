@@ -1,15 +1,15 @@
-import { createStackNavigator } from "@react-navigation/stack";
-import { StartScreen } from './components/StartScreen';
+// import { createStackNavigator } from "@react-navigation/stack";
+// import { StartScreen } from './components/StartScreen';
 
-const Stack = createStackNavigator();
+// const Stack = createStackNavigator();
 
-const Main = () => {
+// const Main = () => {
 
-    return (
-        <Stack.Navigator>
-            <Stack.Screen name="Start" component={StartScreen} />
-        </Stack.Navigator>
-    );
-};
+//     return (
+//         <Stack.Navigator>
+//             <Stack.Screen name="Start" component={StartScreen} />
+//         </Stack.Navigator>
+//     );
+// };
 
-export default Main;
+// export default Main;
