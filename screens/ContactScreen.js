@@ -56,7 +56,7 @@ const ContactScreen = () => {
                 'Message Sent',
                 'Your message has been submitted successfully.',
                 [
-                    { text: 'OK', onPress: () => console.log('OK Pressed') }
+                    { text: 'OK', onPress: () => console.log('Message sent successfully') }
                 ]
             );
 
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: normalize(40),
-        color: COLOR_ACCENT,
+        color: COLOR_PRIMARY,
         backgroundColor: 'white',
         marginVertical: normalize(10),
         paddingHorizontal: normalize(20),

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Pressable, Text, StyleSheet, TextInput, Alert, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert, TouchableWithoutFeedback } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
-import { Input } from '@rneui/themed';
+
 import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientButton from '../components/GradientButton';
@@ -29,6 +29,7 @@ const LoginScreen = ({ route, navigation }) => {
                 const userProfile = JSON.parse(userProfileJSON);
                 if (userProfile.email === email) {
                     navigation.navigate('Home');
+                    console.log('Login was successful!');
                 } else {
                     Alert.alert('Invalid user', 'User does not exist. Please sign up.');
                 }
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     input: {
         width: '80%',
         height: normalize(40),
-        color: COLOR_ACCENT,
+        color: 'white',
         backgroundColor: COLOR_INPUT_LIGHT,
         marginVertical: normalize(12),
         paddingHorizontal: normalize(20),

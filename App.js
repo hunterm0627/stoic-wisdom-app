@@ -19,7 +19,6 @@ import StartScreen from './screens/StartScreen';
 import PolicyScreen from './screens/PolicyScreen';
 import TermsScreen from './screens/TermsScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import LinearGradient from 'react-native-linear-gradient';
 
 
 const Stack = createStackNavigator();
@@ -139,7 +138,7 @@ function CustomDrawerContent(props) {
                 label="Help"
                 inactiveTintColor={COLOR_ACCENT}
                 pressColor='lightgray'
-                onPress={() => alert('Link to help')}
+                onPress={() => alert('For more assistance please go to our website by following this link. (link)')}
             // Add your own styling here
             />
             <DrawerItem

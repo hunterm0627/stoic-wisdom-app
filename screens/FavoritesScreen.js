@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, FlatList, TouchableOpacity, Animated } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Swipeable } from 'react-native-gesture-handler';
@@ -11,11 +12,9 @@ const FavoritesScreen = () => {
     const [favoriteQuotes, setFavoriteQuotes] = useState([]);
     const [error, setError] = useState(false);
 
-    useEffect(() => {
-        retrieveFavoriteQuotes();
-    }, []);
 
-    const retrieveFavoriteQuotes = async () => {
+
+    const retrieveFavoriteQuotes = useCallback(async () => {
         try {
             const favoriteQuotesJSON = await AsyncStorage.getItem('favoriteQuotes');
             if (favoriteQuotesJSON !== null) {
@@ -25,13 +24,23 @@ const FavoritesScreen = () => {
             setError(true);
             console.error('Error fetching favorites:', error);
         }
-    };
+    }, []);
 
-    const removeFavoriteQuote = async (id) => {
+    useFocusEffect(
+        useCallback(() => {
+            retrieveFavoriteQuotes();
+            return () => {}; // cleanup function
+        }, [retrieveFavoriteQuotes])
+    );
+
+    const removeFavoriteQuote = async (item) => {
+        const { id } = item;
+        const quote = favoriteQuotes.find((favorite) => favorite.id === id);
         try {
             const newFavoriteQuotes = favoriteQuotes.filter((quote) => quote.id !== id);
             setFavoriteQuotes(newFavoriteQuotes);
             await AsyncStorage.setItem('favoriteQuotes', JSON.stringify(newFavoriteQuotes));
+            console.log(`${quote.firstName} ${quote.lastName}quote (id ${id}) has been removed from favorites list`);
         } catch (error) {
             setError(true);
             console.error('Error removing favorite:', error);
@@ -44,7 +53,7 @@ const FavoritesScreen = () => {
             outputRange: [-20, 0, 0, 1],
         });
         return (
-            <TouchableOpacity onPress={() => removeFavoriteQuote(item.id)} style={styles.deleteBox}>
+            <TouchableOpacity onPress={() => removeFavoriteQuote(item, item.quote)} style={styles.deleteBox}>
                 <Animated.Text
                     style={[
                         styles.deleteText,

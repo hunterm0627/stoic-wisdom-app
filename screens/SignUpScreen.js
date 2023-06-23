@@ -114,24 +114,23 @@ const SignUpScreen = ({ navigation }) => {
                     </Text>
                 </Text>
             </TouchableOpacity>
-            
+
+            {error ? (
+                <View style={styles.errorContainer}>
+                    <Text style={styles.errorText}>{error}</Text>
+                </View>
+            ) : null}
             <GradientButton
-            title="Create Account"
-            colors={GRADIENT_SECONDARY}
-            onPress={signUpUser}
-            style={{ marginTop: normalize(20), marginBottom: normalize(20), width: '70%' }}
-        />
+                title="Create Account"
+                colors={GRADIENT_SECONDARY}
+                onPress={signUpUser}
+                style={{ marginTop: normalize(20), marginBottom: normalize(20), width: '70%' }}
+            />
 
-            {/* <Pressable title="Create Account" onPress={handleSignUp} style={styles.button}>
-                <Text style={styles.textBtn}>Create Account</Text>
-            </Pressable> */}
-
-            {error ? <Text style={styles.errorText}>{error}</Text> : null}
-
-                <Text style={styles.text}>
-                        Already have an account?{' '}
+            <Text style={styles.text}>
+                Already have an account?{' '}
                 <Text style={styles.textLink} onPress={handleLoginPress}>
-                        Log in.
+                    Log in.
                 </Text>{' '}
             </Text>
         </LinearGradient>
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
     input: {
         width: '85%',
         height: normalize(40),
-        color: COLOR_ACCENT,
+        color: 'white',
         backgroundColor: COLOR_INPUT_LIGHT,
         marginVertical: normalize(12),
         paddingHorizontal: normalize(20),
@@ -206,6 +205,17 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginTop: normalize(15),
         marginBottom: normalize(70),
+    },
+    errorContainer: {
+        backgroundColor: 'white',
+        borderRadius: normalize(8),
+        padding: normalize(8),
+        marginTop: normalize(8),
+    },
+    errorText: {
+        color: 'red',
+        fontSize: normalize(14),
+        textAlign: 'center',
     },
 });
 
