@@ -106,12 +106,16 @@ function CustomDrawerContent(props) {
     const navigation = useNavigation();
 
     const resetFavoriteQuotes = async () => {
-        try {
+    try {
+        const userLoggedIn = await AsyncStorage.getItem('userLoggedIn');
+        if (userLoggedIn === 'true') {
             await AsyncStorage.removeItem('favoriteQuotes');
-        } catch (error) {
-            console.error('Error resetting favorites:', error);
+            // Additional cleanup or reset logic if needed
         }
-    };
+    } catch (error) {
+        console.error('Error resetting favorites:', error);
+    }
+};
 
     useEffect(() => {
         const unFavorite = navigation.addListener('focus', resetFavoriteQuotes);
