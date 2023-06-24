@@ -78,10 +78,10 @@ const Quotes = () => {
             setFavoriteQuotes((prevFavoriteQuotes) =>
                 prevFavoriteQuotes.filter((favorite) => favorite.id !== quote.id)
             );
-            console.log(`${quote.firstName} ${quote.lastName}quote (id ${quote.id}) has been unfavorited`)
+            console.log(`${quote.firstName} ${quote.lastName} quote (id ${quote.id}) has been unfavorited`)
         } else {
             setFavoriteQuotes((prevFavoriteQuotes) => [...prevFavoriteQuotes, quote]);
-            console.log(`${quote.firstName} ${quote.lastName}quote (id ${quote.id}) has been favorited`)
+            console.log(`${quote.firstName} ${quote.lastName} quote (id ${quote.id}) has been favorited`)
         }
     };
 

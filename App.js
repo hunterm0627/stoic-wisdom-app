@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { useFonts, Raleway_400Regular, Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem, DrawerContent } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, StyleSheet, Image, Text, Dimensions } from 'react-native';
 import { COLOR_ACCENT, COLOR_HEART, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_PRIMARY } from './shared/colors';
 import { normalize } from './utils/scaleUtil';
+import { Ionicons } from '@expo/vector-icons';
 
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
@@ -27,6 +28,16 @@ const Drawer = createDrawerNavigator();
 // Main Stack Navigation
 
 function App() {
+
+    const [fontsLoaded] = useFonts({
+        Raleway_400Regular,
+        Raleway_700Bold,
+    });
+
+    if (!fontsLoaded) {
+        return null; // Render a fallback UI while the fonts are loading
+    }
+
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName='StartScreen'>
@@ -57,7 +68,10 @@ function HomeDrawer({ label, focused }) {
                 options={{
                     drawerLabel: () => (
                         <Text style={styles.drawerText}>Dashboard</Text>
-                    )
+                    ),
+                    drawerIcon: ({ size }) => (
+                        <Ionicons name="home" color={COLOR_PRIMARY} size={size} style={styles.drawerIcon} />
+                    ),
                 }}
             />
             <Drawer.Screen
@@ -66,7 +80,10 @@ function HomeDrawer({ label, focused }) {
                 options={{
                     drawerLabel: () => (
                         <Text style={styles.drawerText}>Favorites</Text>
-                    )
+                    ),
+                    drawerIcon: ({ size }) => (
+                        <Ionicons name="heart" color={COLOR_PRIMARY} size={size} style={styles.drawerIcon} />
+                    ),
                 }}
             />
             <Drawer.Screen
@@ -75,6 +92,9 @@ function HomeDrawer({ label, focused }) {
                 options={{
                     drawerLabel: () => (
                         <Text style={styles.drawerText}>About</Text>
+                    ),
+                    drawerIcon: ({ size }) => (
+                        <Ionicons name="information-circle" color={COLOR_PRIMARY} size={size} style={styles.drawerIcon} />
                     ),
                     drawerActiveBackgroundColor: COLOR_SECONDARY,
                 }}
@@ -85,7 +105,10 @@ function HomeDrawer({ label, focused }) {
                 options={{
                     drawerLabel: () => (
                         <Text style={styles.drawerText}>Contact</Text>
-                    )
+                    ),
+                    drawerIcon: ({ size }) => (
+                        <Ionicons name="mail" color={COLOR_PRIMARY} size={size} style={styles.drawerIcon} />
+                    ),
                 }}
             />
             <Drawer.Screen
@@ -94,7 +117,10 @@ function HomeDrawer({ label, focused }) {
                 options={{
                     drawerLabel: () => (
                         <Text style={styles.drawerText}>Profile</Text>
-                    )
+                    ),
+                    drawerIcon: ({ size }) => (
+                        <Ionicons name="person" color={COLOR_PRIMARY} size={size} style={styles.drawerIcon} />
+                    ),
                 }}
             />
         </Drawer.Navigator>
@@ -106,16 +132,16 @@ function CustomDrawerContent(props) {
     const navigation = useNavigation();
 
     const resetFavoriteQuotes = async () => {
-    try {
-        const userLoggedIn = await AsyncStorage.getItem('userLoggedIn');
-        if (userLoggedIn === 'true') {
-            await AsyncStorage.removeItem('favoriteQuotes');
-            // Additional cleanup or reset logic if needed
+        try {
+            const userLoggedIn = await AsyncStorage.getItem('userLoggedIn');
+            if (userLoggedIn === 'true') {
+                await AsyncStorage.removeItem('favoriteQuotes');
+                // Additional cleanup or reset logic if needed
+            }
+        } catch (error) {
+            console.error('Error resetting favorites:', error);
         }
-    } catch (error) {
-        console.error('Error resetting favorites:', error);
-    }
-};
+    };
 
     useEffect(() => {
         const unFavorite = navigation.addListener('focus', resetFavoriteQuotes);
@@ -130,15 +156,17 @@ function CustomDrawerContent(props) {
         <DrawerContentScrollView {...props} >
 
             <View style={styles.drawerHeader}>
-                <Image
+                <Text style={styles.titleStoic}>STOIC</Text>
+                <Text style={styles.titleWisdom}> WISDOM</Text>
+                {/* <Image
                     source={require('./assets/images/default.png')}
                     style={styles.drawerImage}
-                />
+                /> */}
             </View>
-            
+
             <DrawerItemList {...props} />
 
-            <DrawerItem 
+            <DrawerItem
                 label="Help"
                 inactiveTintColor={COLOR_ACCENT}
                 pressColor='lightgray'
@@ -167,6 +195,9 @@ function CustomDrawerContent(props) {
                     await resetFavoriteQuotes();
                     navigation.navigate('Login');
                 }}
+                icon={({ size }) => (
+                    <Ionicons name="exit-outline" color={COLOR_SECONDARY} size={size} style={styles.drawerIcon}/>
+                )}
             />
         </DrawerContentScrollView>
     );
@@ -174,26 +205,51 @@ function CustomDrawerContent(props) {
 
 const styles = StyleSheet.create({
     drawerHeader: {
-        height: 150,
+        flex: 1,
+        // flexDirection: 'row',
+        height: normalize(130),
         backgroundColor: COLOR_PRIMARY,
-        justifyContent: 'center',
         alignItems: 'center',
+        paddingTop: normalize(10),
+        paddingRight: normalize(15),
+        // verticalAlign: 'middle',
+        // textAlign: 'center',
+        // justifyContent: 'center',
     },
     drawerText: {
         // color: COLOR_ACCENT,
         fontSize: 25,
         fontWeight: '700',
         letterSpacing: normalize(3),
-        marginLeft: normalize(10),
+        // marginLeft: normalize(5),
         paddingVertical: normalize(3),
     },
     drawerImage: {
-        height: normalize(100),
-        width: normalize(100),
+        height: normalize(80),
+        width: normalize(80),
         // borderRadius: 50,
+    },
+    titleStoic: {
+        fontFamily: 'Raleway_700Bold',
+        fontWeight: '800',
+        fontSize: normalize(55),
+        marginBottom: normalize(-15),
+        color: 'white',
+        // includeFontPadding: false,
+    },
+    titleWisdom: {
+        fontFamily: 'Raleway_400Regular',
+        fontWeight: '100',
+        fontSize: normalize(38),
+        // marginBottom: normalize(25),
+        color: 'white',
     },
     text: {
         // color: 'white',
+    },
+    drawerIcon: {
+        marginRight: normalize(-10), // Adjust the horizontal margin as needed
+        paddingVertical: 0, // Adjust the vertical padding as needed
     },
 });
 

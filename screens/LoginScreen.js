@@ -2,26 +2,37 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, Alert, TouchableWithoutFeedback } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
-
+import { useFonts, Raleway_400Regular, Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientButton from '../components/GradientButton';
 
+
+
 const LoginScreen = ({ route, navigation }) => {
     /* 2. Get the param */
     // const { itemId, otherParam } = route.params;
-
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    
     const handleSignUpPress = () => {
         navigation.navigate('SignUp');
     };
-
+    
     const handleLoginPress = () => {
         navigation.navigate('Login');
     };
+    
+    const [fontsLoaded] = useFonts({
+        Raleway_400Regular,
+        Raleway_700Bold,
+    });
 
+    if (!fontsLoaded) {
+        return null; // Render a fallback UI while the fonts are loading
+    }
+    
     const loginUser = async () => {
         try {
             const userProfileJSON = await AsyncStorage.getItem('userProfile');
@@ -43,14 +54,14 @@ const LoginScreen = ({ route, navigation }) => {
 
     return (
         <LinearGradient style={styles.container} colors={GRADIENT_PRIMARY}>
-            <View style={styles.absoluteText}>
+            <View style={styles.textContainer}>
                 <Text style={styles.titleStoic}>STOIC</Text>
                 <Text style={styles.titleWisdom}>WISDOM</Text>
             </View>
             <TextInput
                 style={styles.input}
                 placeholder="Email"
-                placeholderTextColor= {COLOR_ACCENT}
+                placeholderTextColor={COLOR_ACCENT}
                 value={email}
                 onChangeText={setEmail}
             />
@@ -70,8 +81,8 @@ const LoginScreen = ({ route, navigation }) => {
             />
 
             <TouchableWithoutFeedback onPress={handleLoginPress} >
-                    <Text style={styles.textForgot}>Forgot Password?</Text>
-                </TouchableWithoutFeedback>
+                <Text style={styles.textForgot}>Forgot Password?</Text>
+            </TouchableWithoutFeedback>
 
             <Text style={styles.text}>
                 Don't have an account?{'  '}
@@ -92,24 +103,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // justifyContent: 'center',
         backgroundColor: COLOR_PRIMARY,
-        
+
     },
     // Title styling
     titleStoic: {
-        fontSize: normalize(73),
+        fontFamily: 'Raleway_700Bold',
         fontWeight: '800',
+        fontSize: normalize(90),
         marginBottom: normalize(-28),
         color: 'white',
         includeFontPadding: false,
-        textAlignVertical: 'center'
     },
     titleWisdom: {
-        fontSize: normalize(50),
+        fontFamily: 'Raleway_400Regular',
         fontWeight: '100',
+        fontSize: normalize(60),
         marginBottom: normalize(25),
         color: 'white',
-        textAlignVertical: 'center'
-        
+    },
+    textContainer: {
+        alignItems: 'center',
     },
     input: {
         width: '80%',

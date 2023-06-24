@@ -1,12 +1,23 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, TouchableOpacity, Pressable, Image } from 'react-native';
 import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
+import { useFonts, Raleway_400Regular, Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientButton from '../components/GradientButton';
 
 
 const StartScreen = ({ navigation }) => {
+
+    const [fontsLoaded] = useFonts({
+        Raleway_400Regular,
+        Raleway_700Bold,
+    });
+
+    if (!fontsLoaded) {
+        return null; // Render a fallback UI while the fonts are loading
+    }
+
     return (
         <LinearGradient style={styles.container} colors={GRADIENT_PRIMARY}>
             <Text style={styles.titleStoic}>STOIC</Text>
@@ -25,6 +36,7 @@ const StartScreen = ({ navigation }) => {
                 colors={GRADIENT_SECONDARY}
                 onPress={() => { navigation.navigate('Login') }}
                 style={{ marginTop: 20, width: '70%' }}
+                textStyle={styles.buttonText}
             />
 
             {/* Sign Up Button */}
@@ -48,20 +60,21 @@ const styles = StyleSheet.create({
     },
     // Title styling
     titleStoic: {
-        fontSize: normalize(80),
+        fontFamily: 'Raleway_700Bold',
         fontWeight: '800',
-        marginBottom: normalize(-28),
+        fontSize: normalize(90),
+        marginBottom: normalize(-35),
         color: 'white',
         includeFontPadding: false,
-        textAlignVertical: 'center'
+        // textAlignVertical: 'center'
     },
     titleWisdom: {
-        fontSize: normalize(55),
+        fontFamily: 'Raleway_400Regular',
         fontWeight: '100',
+        fontSize: normalize(60),
         marginBottom: normalize(5),
         color: 'white',
-        textAlignVertical: 'center'
-
+        // textAlignVertical: 'center'
     },
     subtitle: {
         fontSize: normalize(15),
@@ -69,8 +82,8 @@ const styles = StyleSheet.create({
     },
     // Head image
     image: {
-        width: normalize(220),
-        height: normalize(220),
+        width: normalize(270),
+        height: normalize(270),
         marginTop: normalize(-35), // Adjust as needed to create overlap
         marginBottom: normalize(2),
         resizeMode: 'contain', // To maintain image aspect ratio
@@ -78,16 +91,8 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: COLOR_SECONDARY,
     },
-    // loginBtn: {
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // paddingVertical: normalize(10),
-        // paddingHorizontal: normalize(40),
-        // borderRadius: normalize(50),
-        // marginTop: normalize(20),
-        // elevation: 3,
-        // backgroundColor: COLOR_SECONDARY,
-        // width: '80%',
+    // buttonText: {
+    //     fontSize: normalize(20),
     // },
     signUpBtn: {
         alignItems: 'center',
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
         width: '60%',
     },
     text: {
-        fontSize: normalize(16),
+        fontSize: normalize(20),
         color: 'white',
     }
 });

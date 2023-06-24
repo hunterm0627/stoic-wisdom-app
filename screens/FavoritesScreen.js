@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Swipeable } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { normalize } from '../utils/scaleUtil';
-import { COLOR_HEART } from '../shared/colors';
+import { COLOR_HEART, COLOR_SECONDARY } from '../shared/colors';
 import { Text as RneuiText } from '@rneui/themed';
 
 const FavoritesScreen = () => {
@@ -138,8 +138,8 @@ const styles = {
         marginBottom: normalize(10),
         padding: normalize(10),
         backgroundColor: '#fff',
-        borderLeftWidth: normalize(10), // Add this line to add a border to the left side
-        borderLeftColor: COLOR_HEART, // Set the desired color for the border
+        borderLeftWidth: normalize(15), // Add this line to add a border to the left side
+        borderLeftColor: COLOR_SECONDARY, // Set the desired color for the border
     },
     quoteText: {
         fontSize: normalize(18),
@@ -148,7 +148,7 @@ const styles = {
     quoteName: {
         fontSize: normalize(18),
         padding: normalize(5),
-        color: COLOR_HEART,
+        color: COLOR_SECONDARY,
     },
     deleteBox: {
         flex: 1,
