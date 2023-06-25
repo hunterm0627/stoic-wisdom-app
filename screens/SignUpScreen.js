@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet, TextInput, Alert, Pressable, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Alert, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
 import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_PRIMARY, GRADIENT_SECONDARY } from '../shared/colors';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, TextInput, View, StyleSheet, Pressable, TouchableOpacity, Alert } from 'react-native';
-import { COLOR_PRIMARY, COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_WHITE, GRADIENT_PRIMARY } from '../shared/colors'
+import { TextInput, View, StyleSheet, Alert } from 'react-native';
+import { COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors'
 import { Text } from '@rneui/themed';
 import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';

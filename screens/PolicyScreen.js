@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet } from 'react-native';
+import { ScrollView, Text, StyleSheet } from 'react-native';
 import { COLOR_SECONDARY } from '../shared/colors';
 
 const PrivacyPolicyScreen = () => {

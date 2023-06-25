@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, TouchableOpacity, Pressable, Image } from 'react-native';
+import { Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { COLOR_ACCENT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_PRIMARY } from '../shared/colors';
 import { useFonts, Raleway_400Regular, Raleway_700Bold } from '@expo-google-fonts/raleway';
 import { normalize } from '../utils/scaleUtil';

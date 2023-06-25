@@ -1,6 +1,6 @@
 import React from 'react';
-import { COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_SECONDARY, GRADIENT_WHITE } from '../shared/colors';
-import { View, StyleSheet, } from 'react-native';
+import { COLOR_SECONDARY, GRADIENT_WHITE } from '../shared/colors';
+import { StyleSheet, } from 'react-native';
 import { Card, Text } from '@rneui/themed';
 import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         letterSpacing: normalize(4),
     },
     h4: {
-        fontSize: normalize(15),
+        fontSize: normalize(20),
         marginHorizontal: '10%',
         fontWeight: '400',
         color: 'slategray',

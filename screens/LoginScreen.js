@@ -7,11 +7,7 @@ import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';
 import GradientButton from '../components/GradientButton';
 
-
-
 const LoginScreen = ({ route, navigation }) => {
-    /* 2. Get the param */
-    // const { itemId, otherParam } = route.params;
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

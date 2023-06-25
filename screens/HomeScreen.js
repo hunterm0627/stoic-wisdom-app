@@ -15,10 +15,12 @@ const Quotes = () => {
     const [prevQuotes, setPrevQuotes] = useState([]);
     const [favoriteQuotes, setFavoriteQuotes] = useState([]);
 
+    // Retrieve favorite quotes from AsyncStorage on component mount
     useEffect(() => {
         retrieveFavoriteQuotes();
     }, []);
 
+    // Update prevQuotes when quoteIndex changes
     useEffect(() => {
         const quote = QUOTES[quoteIndex];
 
@@ -31,10 +33,12 @@ const Quotes = () => {
         });
     }, [quoteIndex]);
 
+    // Save favoriteQuotes to AsyncStorage when it changes
     useEffect(() => {
         saveFavoriteQuotes();
     }, [favoriteQuotes]);
 
+    // Retrieve favorite quotes from AsyncStorage
     const retrieveFavoriteQuotes = useCallback(async () => {
         try {
             const favoriteQuotesJSON = await AsyncStorage.getItem('favoriteQuotes');
@@ -48,6 +52,7 @@ const Quotes = () => {
         }
     }, []);
 
+    // Fetch favorite quotes on screen focus
     useFocusEffect(
         useCallback(() => {
             retrieveFavoriteQuotes();
@@ -55,6 +60,7 @@ const Quotes = () => {
         }, [retrieveFavoriteQuotes])
     );
 
+    // Save favorite quotes to AsyncStorage
     const saveFavoriteQuotes = async () => {
         try {
             await AsyncStorage.setItem('favoriteQuotes', JSON.stringify(favoriteQuotes));
@@ -63,6 +69,7 @@ const Quotes = () => {
         }
     };
 
+    // Get a random quote that hasn't been shown before
     const getRandomQuote = () => {
         let newIndex;
         do {
@@ -71,6 +78,7 @@ const Quotes = () => {
         setQuoteIndex(newIndex);
     };
 
+    // Toggle a quote as a favorite or remove it from favorites
     const toggleFavorite = () => {
         const quote = QUOTES[quoteIndex];
 
@@ -85,15 +93,17 @@ const Quotes = () => {
         }
     };
 
+    // Extract necessary data from the current quote
     const { quote, firstName, lastName, image } = QUOTES[quoteIndex];
     const ImageComponent = AuthorImages[image] || AuthorImages.defaultImg;
-
+    
+    // Check if the current quote is marked as a favorite
     const isFavorite = favoriteQuotes.some((favorite) => favorite.id === QUOTES[quoteIndex].id);
 
     return (
         <LinearGradient style={styles.container} colors={GRADIENT_WHITE}>
             <View style={styles.quoteContainer}>
-                <Image source={ImageComponent} style={styles.image} resizeMode="cover" />
+                    <Image source={ImageComponent} style={styles.image} resizeMode="cover" />
                 <View style={styles.quoteTextContainer}>
                     <View style={styles.quoteWrapper}>
                         <Text style={styles.quoteText} adjustsFontSizeToFit>
@@ -133,9 +143,9 @@ const styles = StyleSheet.create({
         marginTop: normalize(10),
     },
     image: {
-        width: normalize(70),
-        height: normalize(70),
-        marginBottom: normalize(10),
+        width: normalize(100),
+        height: normalize(100),
+        marginBottom: normalize(5),
     },
     quoteWrapper: {
         height: normalize(250),
@@ -147,12 +157,12 @@ const styles = StyleSheet.create({
         marginBottom: normalize(5),
     },
     quoteText: {
-        fontSize: normalize(24),
+        fontSize: normalize(30),
         textAlign: 'center',
         lineHeight: normalize(36),
     },
     authorText: {
-        fontSize: normalize(18),
+        fontSize: normalize(25),
         color: COLOR_SECONDARY,
         marginTop: normalize(10),
         fontWeight: '500',

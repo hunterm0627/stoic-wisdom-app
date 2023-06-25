@@ -13,10 +13,10 @@ const UserScreen = () => {
 
     return (
         <View>
-            <TextInput placeholder="First Name" onChangeText={setFirstName} />
-            <TextInput placeholder="Last Name" onChangeText={setLastName} />
-            <TextInput placeholder="Email" onChangeText={setEmail} />
-            <TextInput placeholder="Password" onChangeText={setPassword} secureTextEntry />
+            <TextInput placeholder="First Name" value={firstName} onChangeText={setFirstName} />
+            <TextInput placeholder="Last Name"  value={lastName} onChangeText={setLastName} />
+            <TextInput placeholder="Email"  value={email} onChangeText={setEmail} />
+            <TextInput placeholder="Password" value={password} onChangeText={setPassword} secureTextEntry />
             <Button title="Update" onPress={handleUpdate} />
         </View>
     );

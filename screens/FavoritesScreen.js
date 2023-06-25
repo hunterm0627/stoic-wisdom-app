@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { View, Text, FlatList, TouchableOpacity, Animated } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -12,7 +12,7 @@ const FavoritesScreen = () => {
     const [favoriteQuotes, setFavoriteQuotes] = useState([]);
     const [error, setError] = useState(false);
 
-
+    // Function to retrieve favorite quotes from AsyncStorage
 
     const retrieveFavoriteQuotes = useCallback(async () => {
         try {
@@ -26,12 +26,16 @@ const FavoritesScreen = () => {
         }
     }, []);
 
+    // Hook that runs the retrieveFavoriteQuotes function when the screen is focused
+
     useFocusEffect(
         useCallback(() => {
             retrieveFavoriteQuotes();
             return () => {}; // cleanup function
         }, [retrieveFavoriteQuotes])
     );
+
+    // Function to remove a favorite quote from the list
 
     const removeFavoriteQuote = async (item) => {
         const { id } = item;
@@ -46,6 +50,8 @@ const FavoritesScreen = () => {
             console.error('Error removing favorite:', error);
         }
     };
+
+    // Function to render right actions for swipeable items
 
     const renderRightActions = (progress, dragX, item) => {
         const trans = dragX.interpolate({
@@ -68,6 +74,8 @@ const FavoritesScreen = () => {
             </TouchableOpacity>
         );
     };
+
+    // If there's an error, display an error message
 
     if (error) {
         return (

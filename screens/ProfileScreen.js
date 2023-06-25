@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, InputLabel, StyleSheet, Button, Alert } from 'react-native';
-import { COLOR_ACCENT, COLOR_INPUT_LIGHT, COLOR_PRIMARY, COLOR_SECONDARY, GRADIENT_PRIMARY, GRADIENT_SECONDARY, GRADIENT_WHITE } from '../shared/colors';
+import { View, Text, TextInput, StyleSheet, Alert } from 'react-native';
+import { GRADIENT_SECONDARY, GRADIENT_WHITE } from '../shared/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { normalize } from '../utils/scaleUtil';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -50,59 +50,59 @@ const ProfileScreen = () => {
         <LinearGradient style={styles.container} colors={GRADIENT_WHITE}>
             <View style={styles.content}>
                 <Text style={styles.title}>Profile</Text>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>First Name:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="First Name"
-                    value={firstName}
-                    onChangeText={setFirstName}
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>First Name:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="First Name"
+                        value={firstName}
+                        onChangeText={setFirstName}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Last Name:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Last Name"
+                        value={lastName}
+                        onChangeText={setLastName}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Email:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        value={email}
+                        onChangeText={setEmail}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>New Password:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="New Password"
+                        secureTextEntry
+                        value={password}
+                        onChangeText={setPassword}
+                    />
+                </View>
+                <View style={styles.inputContainer}>
+                    <Text style={styles.label}>Confirm New Password:</Text>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Confirm New Password"
+                        secureTextEntry
+                        value={confirmPassword}
+                        onChangeText={setConfirmPassword}
+                    />
+                </View>
+                <GradientButton
+                    title="Update"
+                    colors={GRADIENT_SECONDARY}
+                    onPress={saveUserProfile}
+                    style={{ marginTop: 20, width: '70%' }}
                 />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>Last Name:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Last Name"
-                    value={lastName}
-                    onChangeText={setLastName}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>Email:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={setEmail}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>New Password:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="New Password"
-                    secureTextEntry
-                    value={password}
-                    onChangeText={setPassword}
-                />
-            </View>
-            <View style={styles.inputContainer}>
-                <Text style={styles.label}>Confirm New Password:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder="Confirm New Password"
-                    secureTextEntry
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                />
-            </View>
-            <GradientButton
-                title="Update"
-                colors={GRADIENT_SECONDARY}
-                onPress={saveUserProfile}
-                style={{ marginTop: 20, width: '70%' }}
-            />
             </View>
         </LinearGradient>
     );
@@ -112,12 +112,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-      },
-      content: {
+    },
+    content: {
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-      },
+    },
     title: {
         fontSize: normalize(30),
         fontWeight: '500',
