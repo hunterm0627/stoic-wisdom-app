@@ -1,4 +1,5 @@
-![App Icon](./assets/default_backup.png)
+<!-- ![App Icon](./assets/default_backup.png) -->
+<img src='./assets/default_backup.png' width='300'>
 
 # Stoic Wisdom - Your Daily Source of Stoic Philosophy 📜
 
