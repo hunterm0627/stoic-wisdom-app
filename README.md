@@ -2,6 +2,7 @@
 <div align='center'>
     <img src='./assets/default_backup.png' width='100'>
 </div>
+
 # Stoic Wisdom - Your Daily Source of Stoic Philosophy 📜
 
 Stoic Wisdom is a mobile application designed to inspire and enlighten users with random quotes from renowned Stoic philosophers. Created by Hunter Mooney using React Native, this app delivers a daily dose of Stoicism right at your fingertips.
